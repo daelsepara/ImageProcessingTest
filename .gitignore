@@ -1,0 +1,4 @@
+ImageProcessingTest/bin/*
+ImageProcessingTest/obj/*
+*.userprefs
+packages/*
