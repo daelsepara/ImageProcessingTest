@@ -1,4 +1,4 @@
-﻿﻿using Emgu.CV;
+using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Features2D;
 using Emgu.CV.Structure;
