@@ -624,24 +624,30 @@ public partial class MainWindow : Gtk.Window
 
                 var img = mat.ToImage<Bgr, byte>();
                 var grayFrame = cv.ConvertToGray(img);
+                var sf = Convert.ToDouble(scaleFactor.Value);
+                var neighbors = Convert.ToInt32(minNeighbors.Value);
+                var minSize = Convert.ToInt32(minArea.Value);
 
-                var faces = _cascadeClassifier.DetectMultiScale(grayFrame, 1.1, 4, new System.Drawing.Size(OriginalImage.Width / 16, OriginalImage.Height / 16));
+                if (sf > 1.0)
+                { 
+                    var faces = _cascadeClassifier.DetectMultiScale(grayFrame, sf, neighbors, new System.Drawing.Size(minSize, minSize));
 
-                GtkSelection.Selection.Clear();
+                    GtkSelection.Selection.Clear();
 
-                if (faces.Length > 0)
-                {
-                    var ScaleX = Convert.ToDouble(imageBox.WidthRequest) / OriginalImage.Width;
-                    var ScaleY = Convert.ToDouble(imageBox.HeightRequest) / OriginalImage.Height;
-
-                    foreach (var face in faces)
+                    if (faces.Length > 0)
                     {
-                        var x0 = Convert.ToInt32(ScaleX * face.X);
-                        var y0 = Convert.ToInt32(ScaleY * face.Y);
-                        var x1 = Convert.ToInt32(ScaleX * (face.X + face.Width - 1));
-                        var y1 = Convert.ToInt32(ScaleY * (face.Y + face.Height - 1));
+                        var ScaleX = Convert.ToDouble(imageBox.WidthRequest) / OriginalImage.Width;
+                        var ScaleY = Convert.ToDouble(imageBox.HeightRequest) / OriginalImage.Height;
 
-                        GtkSelection.Selection.Add(x0, y0, x1, y1);
+                        foreach (var face in faces)
+                        {
+                            var x0 = Convert.ToInt32(ScaleX * face.X);
+                            var y0 = Convert.ToInt32(ScaleY * face.Y);
+                            var x1 = Convert.ToInt32(ScaleX * (face.X + face.Width - 1));
+                            var y1 = Convert.ToInt32(ScaleY * (face.Y + face.Height - 1));
+
+                            GtkSelection.Selection.Add(x0, y0, x1, y1);
+                        }
                     }
                 }
 

@@ -129,6 +129,14 @@ public partial class MainWindow
 
 	private global::Gtk.Button detectFacesButton;
 
+	private global::Gtk.SpinButton scaleFactor;
+
+	private global::Gtk.Label scaleFactorLabel;
+
+	private global::Gtk.SpinButton minNeighbors;
+
+	private global::Gtk.Label minNeighborsLabel;
+
 	protected virtual void Build()
 	{
 		global::Stetic.Gui.Initialize(this);
@@ -164,15 +172,14 @@ public partial class MainWindow
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.selectImageButton = new global::Gtk.Button();
 		this.selectImageButton.WidthRequest = 120;
-		this.selectImageButton.HeightRequest = 30;
 		this.selectImageButton.Name = "selectImageButton";
 		this.selectImageButton.UseUnderline = true;
 		this.selectImageButton.FocusOnClick = false;
 		this.selectImageButton.Label = global::Mono.Unix.Catalog.GetString("select image");
 		this.MainLayout.Add(this.selectImageButton);
 		global::Gtk.Fixed.FixedChild w3 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.selectImageButton]));
-		w3.X = 840;
-		w3.Y = 20;
+		w3.X = 560;
+		w3.Y = 625;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.quitButton = new global::Gtk.Button();
 		this.quitButton.Name = "quitButton";
@@ -192,7 +199,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.cannyThreshold);
 		global::Gtk.Fixed.FixedChild w5 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.cannyThreshold]));
 		w5.X = 840;
-		w5.Y = 60;
+		w5.Y = 30;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.cannyThresholdLabel = new global::Gtk.Label();
 		this.cannyThresholdLabel.Name = "cannyThresholdLabel";
@@ -200,7 +207,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.cannyThresholdLabel);
 		global::Gtk.Fixed.FixedChild w6 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.cannyThresholdLabel]));
 		w6.X = 970;
-		w6.Y = 65;
+		w6.Y = 35;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.linkingThreshold = new global::Gtk.SpinButton(0D, 1000D, 1D);
 		this.linkingThreshold.WidthRequest = 120;
@@ -211,7 +218,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.linkingThreshold);
 		global::Gtk.Fixed.FixedChild w7 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.linkingThreshold]));
 		w7.X = 840;
-		w7.Y = 90;
+		w7.Y = 60;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.linkingThresholdLabel = new global::Gtk.Label();
 		this.linkingThresholdLabel.Name = "linkingThresholdLabel";
@@ -219,7 +226,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.linkingThresholdLabel);
 		global::Gtk.Fixed.FixedChild w8 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.linkingThresholdLabel]));
 		w8.X = 970;
-		w8.Y = 95;
+		w8.Y = 65;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.minArea = new global::Gtk.SpinButton(0D, 100000D, 1D);
 		this.minArea.WidthRequest = 120;
@@ -230,7 +237,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.minArea);
 		global::Gtk.Fixed.FixedChild w9 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.minArea]));
 		w9.X = 840;
-		w9.Y = 120;
+		w9.Y = 90;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.minAreaLabel = new global::Gtk.Label();
 		this.minAreaLabel.Name = "minAreaLabel";
@@ -238,7 +245,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.minAreaLabel);
 		global::Gtk.Fixed.FixedChild w10 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.minAreaLabel]));
 		w10.X = 970;
-		w10.Y = 125;
+		w10.Y = 95;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.maxArea = new global::Gtk.SpinButton(0D, 100000D, 1D);
 		this.maxArea.WidthRequest = 120;
@@ -249,7 +256,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.maxArea);
 		global::Gtk.Fixed.FixedChild w11 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.maxArea]));
 		w11.X = 840;
-		w11.Y = 150;
+		w11.Y = 120;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.maxAreaLabel = new global::Gtk.Label();
 		this.maxAreaLabel.Name = "maxAreaLabel";
@@ -257,7 +264,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.maxAreaLabel);
 		global::Gtk.Fixed.FixedChild w12 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.maxAreaLabel]));
 		w12.X = 970;
-		w12.Y = 155;
+		w12.Y = 125;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.minDist = new global::Gtk.SpinButton(0D, 1000D, 1D);
 		this.minDist.WidthRequest = 120;
@@ -268,7 +275,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.minDist);
 		global::Gtk.Fixed.FixedChild w13 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.minDist]));
 		w13.X = 840;
-		w13.Y = 180;
+		w13.Y = 150;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.minDistLabel = new global::Gtk.Label();
 		this.minDistLabel.Name = "minDistLabel";
@@ -276,7 +283,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.minDistLabel);
 		global::Gtk.Fixed.FixedChild w14 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.minDistLabel]));
 		w14.X = 971;
-		w14.Y = 184;
+		w14.Y = 155;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.circleAccumulatorThreshold = new global::Gtk.SpinButton(0D, 1000D, 1D);
 		this.circleAccumulatorThreshold.WidthRequest = 120;
@@ -284,11 +291,10 @@ public partial class MainWindow
 		this.circleAccumulatorThreshold.Adjustment.PageIncrement = 10D;
 		this.circleAccumulatorThreshold.ClimbRate = 1D;
 		this.circleAccumulatorThreshold.Numeric = true;
-		this.circleAccumulatorThreshold.Value = 6D;
 		this.MainLayout.Add(this.circleAccumulatorThreshold);
 		global::Gtk.Fixed.FixedChild w15 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.circleAccumulatorThreshold]));
 		w15.X = 840;
-		w15.Y = 210;
+		w15.Y = 180;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.circleAccumulatorThresholdLabel = new global::Gtk.Label();
 		this.circleAccumulatorThresholdLabel.Name = "circleAccumulatorThresholdLabel";
@@ -296,7 +302,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.circleAccumulatorThresholdLabel);
 		global::Gtk.Fixed.FixedChild w16 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.circleAccumulatorThresholdLabel]));
 		w16.X = 970;
-		w16.Y = 215;
+		w16.Y = 185;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.minRadius = new global::Gtk.SpinButton(0D, 1000D, 1D);
 		this.minRadius.WidthRequest = 120;
@@ -307,7 +313,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.minRadius);
 		global::Gtk.Fixed.FixedChild w17 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.minRadius]));
 		w17.X = 840;
-		w17.Y = 240;
+		w17.Y = 210;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.minRadiusLabel = new global::Gtk.Label();
 		this.minRadiusLabel.Name = "minRadiusLabel";
@@ -315,7 +321,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.minRadiusLabel);
 		global::Gtk.Fixed.FixedChild w18 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.minRadiusLabel]));
 		w18.X = 970;
-		w18.Y = 245;
+		w18.Y = 215;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.maxRadius = new global::Gtk.SpinButton(0D, 1000D, 1D);
 		this.maxRadius.WidthRequest = 120;
@@ -326,7 +332,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.maxRadius);
 		global::Gtk.Fixed.FixedChild w19 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.maxRadius]));
 		w19.X = 840;
-		w19.Y = 270;
+		w19.Y = 240;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.maxRadiusLabel = new global::Gtk.Label();
 		this.maxRadiusLabel.Name = "maxRadiusLabel";
@@ -334,7 +340,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.maxRadiusLabel);
 		global::Gtk.Fixed.FixedChild w20 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.maxRadiusLabel]));
 		w20.X = 970;
-		w20.Y = 275;
+		w20.Y = 245;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.markerColor = new global::Gtk.ColorButton();
 		this.markerColor.WidthRequest = 120;
@@ -344,7 +350,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.markerColor);
 		global::Gtk.Fixed.FixedChild w21 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.markerColor]));
 		w21.X = 840;
-		w21.Y = 360;
+		w21.Y = 390;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.colorButtonLabel = new global::Gtk.Label();
 		this.colorButtonLabel.Name = "colorButtonLabel";
@@ -352,7 +358,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.colorButtonLabel);
 		global::Gtk.Fixed.FixedChild w22 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.colorButtonLabel]));
 		w22.X = 970;
-		w22.Y = 365;
+		w22.Y = 395;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.markerSize = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.markerSize.WidthRequest = 120;
@@ -363,7 +369,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.markerSize);
 		global::Gtk.Fixed.FixedChild w23 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.markerSize]));
 		w23.X = 840;
-		w23.Y = 330;
+		w23.Y = 360;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.markerSizeLabel = new global::Gtk.Label();
 		this.markerSizeLabel.Name = "markerSizeLabel";
@@ -371,7 +377,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.markerSizeLabel);
 		global::Gtk.Fixed.FixedChild w24 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.markerSizeLabel]));
 		w24.X = 970;
-		w24.Y = 335;
+		w24.Y = 365;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.dp = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.dp.WidthRequest = 120;
@@ -382,7 +388,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.dp);
 		global::Gtk.Fixed.FixedChild w25 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.dp]));
 		w25.X = 840;
-		w25.Y = 300;
+		w25.Y = 270;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.dpLabel = new global::Gtk.Label();
 		this.dpLabel.Name = "dpLabel";
@@ -390,7 +396,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.dpLabel);
 		global::Gtk.Fixed.FixedChild w26 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.dpLabel]));
 		w26.X = 970;
-		w26.Y = 305;
+		w26.Y = 275;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.detectCirclesButton = new global::Gtk.Button();
 		this.detectCirclesButton.WidthRequest = 120;
@@ -401,7 +407,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.detectCirclesButton);
 		global::Gtk.Fixed.FixedChild w27 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.detectCirclesButton]));
 		w27.X = 840;
-		w27.Y = 395;
+		w27.Y = 425;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.detectBlobsButton = new global::Gtk.Button();
 		this.detectBlobsButton.WidthRequest = 120;
@@ -412,7 +418,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.detectBlobsButton);
 		global::Gtk.Fixed.FixedChild w28 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.detectBlobsButton]));
 		w28.X = 840;
-		w28.Y = 425;
+		w28.Y = 455;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.blobDetectorButton = new global::Gtk.Button();
 		this.blobDetectorButton.WidthRequest = 120;
@@ -423,7 +429,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.blobDetectorButton);
 		global::Gtk.Fixed.FixedChild w29 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.blobDetectorButton]));
 		w29.X = 840;
-		w29.Y = 455;
+		w29.Y = 485;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.simpleBlobDetector = new global::Gtk.Button();
 		this.simpleBlobDetector.WidthRequest = 120;
@@ -434,7 +440,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.simpleBlobDetector);
 		global::Gtk.Fixed.FixedChild w30 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.simpleBlobDetector]));
 		w30.X = 840;
-		w30.Y = 485;
+		w30.Y = 515;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.subtractBg = new global::Gtk.CheckButton();
 		this.subtractBg.CanFocus = true;
@@ -445,7 +451,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.subtractBg);
 		global::Gtk.Fixed.FixedChild w31 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.subtractBg]));
 		w31.X = 970;
-		w31.Y = 395;
+		w31.Y = 455;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.imgInvert = new global::Gtk.CheckButton();
 		this.imgInvert.CanFocus = true;
@@ -456,7 +462,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.imgInvert);
 		global::Gtk.Fixed.FixedChild w32 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.imgInvert]));
 		w32.X = 970;
-		w32.Y = 425;
+		w32.Y = 485;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.downUpSample = new global::Gtk.CheckButton();
 		this.downUpSample.CanFocus = true;
@@ -468,7 +474,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.downUpSample);
 		global::Gtk.Fixed.FixedChild w33 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.downUpSample]));
 		w33.X = 970;
-		w33.Y = 455;
+		w33.Y = 515;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.gaussianBlur = new global::Gtk.CheckButton();
 		this.gaussianBlur.Name = "gaussianBlur";
@@ -479,7 +485,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.gaussianBlur);
 		global::Gtk.Fixed.FixedChild w34 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.gaussianBlur]));
 		w34.X = 970;
-		w34.Y = 485;
+		w34.Y = 545;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.sx = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.sx.WidthRequest = 120;
@@ -490,7 +496,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.sx);
 		global::Gtk.Fixed.FixedChild w35 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sx]));
 		w35.X = 840;
-		w35.Y = 550;
+		w35.Y = 580;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.sy = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.sy.WidthRequest = 120;
@@ -501,7 +507,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.sy);
 		global::Gtk.Fixed.FixedChild w36 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sy]));
 		w36.X = 840;
-		w36.Y = 580;
+		w36.Y = 610;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.sxLabel = new global::Gtk.Label();
 		this.sxLabel.Name = "sxLabel";
@@ -509,7 +515,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.sxLabel);
 		global::Gtk.Fixed.FixedChild w37 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sxLabel]));
 		w37.X = 970;
-		w37.Y = 555;
+		w37.Y = 585;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.syLabel = new global::Gtk.Label();
 		this.syLabel.Name = "syLabel";
@@ -517,7 +523,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.syLabel);
 		global::Gtk.Fixed.FixedChild w38 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.syLabel]));
 		w38.X = 970;
-		w38.Y = 585;
+		w38.Y = 615;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.sigmaX = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.sigmaX.WidthRequest = 120;
@@ -528,7 +534,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.sigmaX);
 		global::Gtk.Fixed.FixedChild w39 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sigmaX]));
 		w39.X = 840;
-		w39.Y = 610;
+		w39.Y = 640;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.sigmaY = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.sigmaY.WidthRequest = 120;
@@ -539,7 +545,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.sigmaY);
 		global::Gtk.Fixed.FixedChild w40 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sigmaY]));
 		w40.X = 840;
-		w40.Y = 640;
+		w40.Y = 670;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.sigmaXLabel = new global::Gtk.Label();
 		this.sigmaXLabel.Name = "sigmaXLabel";
@@ -547,7 +553,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.sigmaXLabel);
 		global::Gtk.Fixed.FixedChild w41 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sigmaXLabel]));
 		w41.X = 970;
-		w41.Y = 615;
+		w41.Y = 645;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.sigmaYLabel = new global::Gtk.Label();
 		this.sigmaYLabel.Name = "sigmaYLabel";
@@ -555,7 +561,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.sigmaYLabel);
 		global::Gtk.Fixed.FixedChild w42 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sigmaYLabel]));
 		w42.X = 970;
-		w42.Y = 645;
+		w42.Y = 675;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.normalize = new global::Gtk.CheckButton();
 		this.normalize.CanFocus = true;
@@ -566,7 +572,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.normalize);
 		global::Gtk.Fixed.FixedChild w43 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.normalize]));
 		w43.X = 1120;
-		w43.Y = 395;
+		w43.Y = 455;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.saveBlobsButton = new global::Gtk.Button();
 		this.saveBlobsButton.Name = "saveBlobsButton";
@@ -770,7 +776,48 @@ public partial class MainWindow
 		this.MainLayout.Add(this.detectFacesButton);
 		global::Gtk.Fixed.FixedChild w62 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.detectFacesButton]));
 		w62.X = 840;
-		w62.Y = 515;
+		w62.Y = 545;
+		// Container child MainLayout.Gtk.Fixed+FixedChild
+		this.scaleFactor = new global::Gtk.SpinButton(0.01D, 10D, 0.1D);
+		this.scaleFactor.WidthRequest = 120;
+		this.scaleFactor.Name = "scaleFactor";
+		this.scaleFactor.Adjustment.PageIncrement = 0.1D;
+		this.scaleFactor.ClimbRate = 1D;
+		this.scaleFactor.Digits = ((uint)(2));
+		this.scaleFactor.Numeric = true;
+		this.scaleFactor.Value = 1D;
+		this.MainLayout.Add(this.scaleFactor);
+		global::Gtk.Fixed.FixedChild w63 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.scaleFactor]));
+		w63.X = 840;
+		w63.Y = 300;
+		// Container child MainLayout.Gtk.Fixed+FixedChild
+		this.scaleFactorLabel = new global::Gtk.Label();
+		this.scaleFactorLabel.Name = "scaleFactorLabel";
+		this.scaleFactorLabel.LabelProp = global::Mono.Unix.Catalog.GetString("scale factor");
+		this.MainLayout.Add(this.scaleFactorLabel);
+		global::Gtk.Fixed.FixedChild w64 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.scaleFactorLabel]));
+		w64.X = 970;
+		w64.Y = 305;
+		// Container child MainLayout.Gtk.Fixed+FixedChild
+		this.minNeighbors = new global::Gtk.SpinButton(1D, 100D, 1D);
+		this.minNeighbors.WidthRequest = 120;
+		this.minNeighbors.Name = "minNeighbors";
+		this.minNeighbors.Adjustment.PageIncrement = 10D;
+		this.minNeighbors.ClimbRate = 1D;
+		this.minNeighbors.Numeric = true;
+		this.minNeighbors.Value = 1D;
+		this.MainLayout.Add(this.minNeighbors);
+		global::Gtk.Fixed.FixedChild w65 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.minNeighbors]));
+		w65.X = 840;
+		w65.Y = 330;
+		// Container child MainLayout.Gtk.Fixed+FixedChild
+		this.minNeighborsLabel = new global::Gtk.Label();
+		this.minNeighborsLabel.Name = "minNeighborsLabel";
+		this.minNeighborsLabel.LabelProp = global::Mono.Unix.Catalog.GetString("minimun # of rectangle neighbors");
+		this.MainLayout.Add(this.minNeighborsLabel);
+		global::Gtk.Fixed.FixedChild w66 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.minNeighborsLabel]));
+		w66.X = 970;
+		w66.Y = 335;
 		this.Add(this.MainLayout);
 		if ((this.Child != null))
 		{
