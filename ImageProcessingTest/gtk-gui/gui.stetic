@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
   </configuration>
   <import>
-    <widget-library name="../bin/Debug/ImageProcessingTest.exe" internal="true" />
+    <widget-library name="../bin/Release/ImageProcessingTest.exe" internal="true" />
   </import>
   <widget class="Gtk.Window" id="MainWindow" design-size="1280 720">
     <property name="MemberName" />

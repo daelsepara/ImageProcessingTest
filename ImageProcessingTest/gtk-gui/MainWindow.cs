@@ -182,11 +182,11 @@ public partial class MainWindow
 		w4.X = 20;
 		w4.Y = 625;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
-		this.cannyThreshold = new global::Gtk.SpinButton(0, 1000, 1);
+		this.cannyThreshold = new global::Gtk.SpinButton(0D, 1000D, 1D);
 		this.cannyThreshold.WidthRequest = 120;
 		this.cannyThreshold.Name = "cannyThreshold";
-		this.cannyThreshold.Adjustment.PageIncrement = 10;
-		this.cannyThreshold.ClimbRate = 1;
+		this.cannyThreshold.Adjustment.PageIncrement = 10D;
+		this.cannyThreshold.ClimbRate = 1D;
 		this.cannyThreshold.Numeric = true;
 		this.MainLayout.Add(this.cannyThreshold);
 		global::Gtk.Fixed.FixedChild w5 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.cannyThreshold]));
@@ -201,11 +201,11 @@ public partial class MainWindow
 		w6.X = 970;
 		w6.Y = 65;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
-		this.linkingThreshold = new global::Gtk.SpinButton(0, 1000, 1);
+		this.linkingThreshold = new global::Gtk.SpinButton(0D, 1000D, 1D);
 		this.linkingThreshold.WidthRequest = 120;
 		this.linkingThreshold.Name = "linkingThreshold";
-		this.linkingThreshold.Adjustment.PageIncrement = 10;
-		this.linkingThreshold.ClimbRate = 1;
+		this.linkingThreshold.Adjustment.PageIncrement = 10D;
+		this.linkingThreshold.ClimbRate = 1D;
 		this.linkingThreshold.Numeric = true;
 		this.MainLayout.Add(this.linkingThreshold);
 		global::Gtk.Fixed.FixedChild w7 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.linkingThreshold]));
@@ -220,11 +220,11 @@ public partial class MainWindow
 		w8.X = 970;
 		w8.Y = 95;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
-		this.minArea = new global::Gtk.SpinButton(0, 100000, 1);
+		this.minArea = new global::Gtk.SpinButton(0D, 100000D, 1D);
 		this.minArea.WidthRequest = 120;
 		this.minArea.Name = "minArea";
-		this.minArea.Adjustment.PageIncrement = 100;
-		this.minArea.ClimbRate = 1;
+		this.minArea.Adjustment.PageIncrement = 100D;
+		this.minArea.ClimbRate = 1D;
 		this.minArea.Numeric = true;
 		this.MainLayout.Add(this.minArea);
 		global::Gtk.Fixed.FixedChild w9 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.minArea]));
@@ -239,11 +239,11 @@ public partial class MainWindow
 		w10.X = 970;
 		w10.Y = 125;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
-		this.maxArea = new global::Gtk.SpinButton(0, 100000, 1);
+		this.maxArea = new global::Gtk.SpinButton(0D, 100000D, 1D);
 		this.maxArea.WidthRequest = 120;
 		this.maxArea.Name = "maxArea";
-		this.maxArea.Adjustment.PageIncrement = 100;
-		this.maxArea.ClimbRate = 1;
+		this.maxArea.Adjustment.PageIncrement = 100D;
+		this.maxArea.ClimbRate = 1D;
 		this.maxArea.Numeric = true;
 		this.MainLayout.Add(this.maxArea);
 		global::Gtk.Fixed.FixedChild w11 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.maxArea]));
@@ -258,11 +258,11 @@ public partial class MainWindow
 		w12.X = 970;
 		w12.Y = 155;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
-		this.minDist = new global::Gtk.SpinButton(0, 1000, 1);
+		this.minDist = new global::Gtk.SpinButton(0D, 1000D, 1D);
 		this.minDist.WidthRequest = 120;
 		this.minDist.Name = "minDist";
-		this.minDist.Adjustment.PageIncrement = 10;
-		this.minDist.ClimbRate = 1;
+		this.minDist.Adjustment.PageIncrement = 10D;
+		this.minDist.ClimbRate = 1D;
 		this.minDist.Numeric = true;
 		this.MainLayout.Add(this.minDist);
 		global::Gtk.Fixed.FixedChild w13 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.minDist]));
@@ -277,13 +277,13 @@ public partial class MainWindow
 		w14.X = 971;
 		w14.Y = 184;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
-		this.circleAccumulatorThreshold = new global::Gtk.SpinButton(0, 1000, 1);
+		this.circleAccumulatorThreshold = new global::Gtk.SpinButton(0D, 1000D, 1D);
 		this.circleAccumulatorThreshold.WidthRequest = 120;
 		this.circleAccumulatorThreshold.Name = "circleAccumulatorThreshold";
-		this.circleAccumulatorThreshold.Adjustment.PageIncrement = 10;
-		this.circleAccumulatorThreshold.ClimbRate = 1;
+		this.circleAccumulatorThreshold.Adjustment.PageIncrement = 10D;
+		this.circleAccumulatorThreshold.ClimbRate = 1D;
 		this.circleAccumulatorThreshold.Numeric = true;
-		this.circleAccumulatorThreshold.Value = 6;
+		this.circleAccumulatorThreshold.Value = 6D;
 		this.MainLayout.Add(this.circleAccumulatorThreshold);
 		global::Gtk.Fixed.FixedChild w15 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.circleAccumulatorThreshold]));
 		w15.X = 840;
@@ -297,11 +297,11 @@ public partial class MainWindow
 		w16.X = 970;
 		w16.Y = 215;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
-		this.minRadius = new global::Gtk.SpinButton(0, 1000, 1);
+		this.minRadius = new global::Gtk.SpinButton(0D, 1000D, 1D);
 		this.minRadius.WidthRequest = 120;
 		this.minRadius.Name = "minRadius";
-		this.minRadius.Adjustment.PageIncrement = 10;
-		this.minRadius.ClimbRate = 1;
+		this.minRadius.Adjustment.PageIncrement = 10D;
+		this.minRadius.ClimbRate = 1D;
 		this.minRadius.Numeric = true;
 		this.MainLayout.Add(this.minRadius);
 		global::Gtk.Fixed.FixedChild w17 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.minRadius]));
@@ -316,11 +316,11 @@ public partial class MainWindow
 		w18.X = 970;
 		w18.Y = 245;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
-		this.maxRadius = new global::Gtk.SpinButton(0, 1000, 1);
+		this.maxRadius = new global::Gtk.SpinButton(0D, 1000D, 1D);
 		this.maxRadius.WidthRequest = 120;
 		this.maxRadius.Name = "maxRadius";
-		this.maxRadius.Adjustment.PageIncrement = 10;
-		this.maxRadius.ClimbRate = 1;
+		this.maxRadius.Adjustment.PageIncrement = 10D;
+		this.maxRadius.ClimbRate = 1D;
 		this.maxRadius.Numeric = true;
 		this.MainLayout.Add(this.maxRadius);
 		global::Gtk.Fixed.FixedChild w19 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.maxRadius]));
@@ -352,11 +352,11 @@ public partial class MainWindow
 		w22.X = 970;
 		w22.Y = 365;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
-		this.markerSize = new global::Gtk.SpinButton(0, 100, 1);
+		this.markerSize = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.markerSize.WidthRequest = 120;
 		this.markerSize.Name = "markerSize";
-		this.markerSize.Adjustment.PageIncrement = 10;
-		this.markerSize.ClimbRate = 1;
+		this.markerSize.Adjustment.PageIncrement = 10D;
+		this.markerSize.ClimbRate = 1D;
 		this.markerSize.Numeric = true;
 		this.MainLayout.Add(this.markerSize);
 		global::Gtk.Fixed.FixedChild w23 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.markerSize]));
@@ -371,11 +371,11 @@ public partial class MainWindow
 		w24.X = 970;
 		w24.Y = 335;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
-		this.dp = new global::Gtk.SpinButton(0, 100, 1);
+		this.dp = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.dp.WidthRequest = 120;
 		this.dp.Name = "dp";
-		this.dp.Adjustment.PageIncrement = 10;
-		this.dp.ClimbRate = 1;
+		this.dp.Adjustment.PageIncrement = 10D;
+		this.dp.ClimbRate = 1D;
 		this.dp.Numeric = true;
 		this.MainLayout.Add(this.dp);
 		global::Gtk.Fixed.FixedChild w25 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.dp]));
@@ -479,22 +479,22 @@ public partial class MainWindow
 		w34.X = 970;
 		w34.Y = 485;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
-		this.sx = new global::Gtk.SpinButton(0, 100, 1);
+		this.sx = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.sx.WidthRequest = 120;
 		this.sx.Name = "sx";
-		this.sx.Adjustment.PageIncrement = 10;
-		this.sx.ClimbRate = 1;
+		this.sx.Adjustment.PageIncrement = 10D;
+		this.sx.ClimbRate = 1D;
 		this.sx.Numeric = true;
 		this.MainLayout.Add(this.sx);
 		global::Gtk.Fixed.FixedChild w35 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sx]));
 		w35.X = 840;
 		w35.Y = 520;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
-		this.sy = new global::Gtk.SpinButton(0, 100, 1);
+		this.sy = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.sy.WidthRequest = 120;
 		this.sy.Name = "sy";
-		this.sy.Adjustment.PageIncrement = 10;
-		this.sy.ClimbRate = 1;
+		this.sy.Adjustment.PageIncrement = 10D;
+		this.sy.ClimbRate = 1D;
 		this.sy.Numeric = true;
 		this.MainLayout.Add(this.sy);
 		global::Gtk.Fixed.FixedChild w36 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sy]));
@@ -517,22 +517,22 @@ public partial class MainWindow
 		w38.X = 970;
 		w38.Y = 555;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
-		this.sigmaX = new global::Gtk.SpinButton(0, 100, 1);
+		this.sigmaX = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.sigmaX.WidthRequest = 120;
 		this.sigmaX.Name = "sigmaX";
-		this.sigmaX.Adjustment.PageIncrement = 10;
-		this.sigmaX.ClimbRate = 1;
+		this.sigmaX.Adjustment.PageIncrement = 10D;
+		this.sigmaX.ClimbRate = 1D;
 		this.sigmaX.Numeric = true;
 		this.MainLayout.Add(this.sigmaX);
 		global::Gtk.Fixed.FixedChild w39 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sigmaX]));
 		w39.X = 840;
 		w39.Y = 580;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
-		this.sigmaY = new global::Gtk.SpinButton(0, 100, 1);
+		this.sigmaY = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.sigmaY.WidthRequest = 120;
 		this.sigmaY.Name = "sigmaY";
-		this.sigmaY.Adjustment.PageIncrement = 10;
-		this.sigmaY.ClimbRate = 1;
+		this.sigmaY.Adjustment.PageIncrement = 10D;
+		this.sigmaY.ClimbRate = 1D;
 		this.sigmaY.Numeric = true;
 		this.MainLayout.Add(this.sigmaY);
 		global::Gtk.Fixed.FixedChild w40 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sigmaY]));
@@ -611,12 +611,12 @@ public partial class MainWindow
 		global::Gtk.Fixed.FixedChild w47 = ((global::Gtk.Fixed.FixedChild)(this.editRegionLayout[this.regionWidthLabel]));
 		w47.Y = 5;
 		// Container child editRegionLayout.Gtk.Fixed+FixedChild
-		this.widthScaleNumeric = new global::Gtk.SpinButton(2, 1000, 1);
+		this.widthScaleNumeric = new global::Gtk.SpinButton(2D, 1000D, 1D);
 		this.widthScaleNumeric.Name = "widthScaleNumeric";
-		this.widthScaleNumeric.Adjustment.PageIncrement = 10;
-		this.widthScaleNumeric.ClimbRate = 1;
+		this.widthScaleNumeric.Adjustment.PageIncrement = 10D;
+		this.widthScaleNumeric.ClimbRate = 1D;
 		this.widthScaleNumeric.Numeric = true;
-		this.widthScaleNumeric.Value = 2;
+		this.widthScaleNumeric.Value = 2D;
 		this.editRegionLayout.Add(this.widthScaleNumeric);
 		global::Gtk.Fixed.FixedChild w48 = ((global::Gtk.Fixed.FixedChild)(this.editRegionLayout[this.widthScaleNumeric]));
 		w48.X = 50;
@@ -624,10 +624,10 @@ public partial class MainWindow
 		this.widthScale = new global::Gtk.HScale(null);
 		this.widthScale.WidthRequest = 100;
 		this.widthScale.Name = "widthScale";
-		this.widthScale.Adjustment.Lower = 2;
-		this.widthScale.Adjustment.Upper = 1000;
-		this.widthScale.Adjustment.PageIncrement = 10;
-		this.widthScale.Adjustment.StepIncrement = 1;
+		this.widthScale.Adjustment.Lower = 2D;
+		this.widthScale.Adjustment.Upper = 1000D;
+		this.widthScale.Adjustment.PageIncrement = 10D;
+		this.widthScale.Adjustment.StepIncrement = 1D;
 		this.widthScale.DrawValue = false;
 		this.widthScale.Digits = 0;
 		this.widthScale.ValuePos = ((global::Gtk.PositionType)(2));
@@ -635,12 +635,12 @@ public partial class MainWindow
 		global::Gtk.Fixed.FixedChild w49 = ((global::Gtk.Fixed.FixedChild)(this.editRegionLayout[this.widthScale]));
 		w49.X = 120;
 		// Container child editRegionLayout.Gtk.Fixed+FixedChild
-		this.heightScaleNumeric = new global::Gtk.SpinButton(2, 1000, 1);
+		this.heightScaleNumeric = new global::Gtk.SpinButton(2D, 1000D, 1D);
 		this.heightScaleNumeric.Name = "heightScaleNumeric";
-		this.heightScaleNumeric.Adjustment.PageIncrement = 10;
-		this.heightScaleNumeric.ClimbRate = 1;
+		this.heightScaleNumeric.Adjustment.PageIncrement = 10D;
+		this.heightScaleNumeric.ClimbRate = 1D;
 		this.heightScaleNumeric.Numeric = true;
-		this.heightScaleNumeric.Value = 2;
+		this.heightScaleNumeric.Value = 2D;
 		this.editRegionLayout.Add(this.heightScaleNumeric);
 		global::Gtk.Fixed.FixedChild w50 = ((global::Gtk.Fixed.FixedChild)(this.editRegionLayout[this.heightScaleNumeric]));
 		w50.X = 50;
@@ -650,10 +650,10 @@ public partial class MainWindow
 		this.heightScale.WidthRequest = 100;
 		this.heightScale.CanFocus = true;
 		this.heightScale.Name = "heightScale";
-		this.heightScale.Adjustment.Lower = 2;
-		this.heightScale.Adjustment.Upper = 1000;
-		this.heightScale.Adjustment.PageIncrement = 10;
-		this.heightScale.Adjustment.StepIncrement = 1;
+		this.heightScale.Adjustment.Lower = 2D;
+		this.heightScale.Adjustment.Upper = 1000D;
+		this.heightScale.Adjustment.PageIncrement = 10D;
+		this.heightScale.Adjustment.StepIncrement = 1D;
 		this.heightScale.DrawValue = false;
 		this.heightScale.Digits = 0;
 		this.heightScale.ValuePos = ((global::Gtk.PositionType)(2));
@@ -670,10 +670,10 @@ public partial class MainWindow
 		global::Gtk.Fixed.FixedChild w52 = ((global::Gtk.Fixed.FixedChild)(this.editRegionLayout[this.regionHeightLabel]));
 		w52.Y = 35;
 		// Container child editRegionLayout.Gtk.Fixed+FixedChild
-		this.dxScaleNumeric = new global::Gtk.SpinButton(-800, 1600, 1);
+		this.dxScaleNumeric = new global::Gtk.SpinButton(-800D, 1600D, 1D);
 		this.dxScaleNumeric.Name = "dxScaleNumeric";
-		this.dxScaleNumeric.Adjustment.PageIncrement = 10;
-		this.dxScaleNumeric.ClimbRate = 1;
+		this.dxScaleNumeric.Adjustment.PageIncrement = 10D;
+		this.dxScaleNumeric.ClimbRate = 1D;
 		this.dxScaleNumeric.Numeric = true;
 		this.editRegionLayout.Add(this.dxScaleNumeric);
 		global::Gtk.Fixed.FixedChild w53 = ((global::Gtk.Fixed.FixedChild)(this.editRegionLayout[this.dxScaleNumeric]));
@@ -688,11 +688,11 @@ public partial class MainWindow
 		w54.X = 230;
 		w54.Y = 5;
 		// Container child editRegionLayout.Gtk.Fixed+FixedChild
-		this.dyScaleNumeric = new global::Gtk.SpinButton(-800, 1600, 1);
+		this.dyScaleNumeric = new global::Gtk.SpinButton(-800D, 1600D, 1D);
 		this.dyScaleNumeric.CanFocus = true;
 		this.dyScaleNumeric.Name = "dyScaleNumeric";
-		this.dyScaleNumeric.Adjustment.PageIncrement = 10;
-		this.dyScaleNumeric.ClimbRate = 1;
+		this.dyScaleNumeric.Adjustment.PageIncrement = 10D;
+		this.dyScaleNumeric.ClimbRate = 1D;
 		this.dyScaleNumeric.Numeric = true;
 		this.editRegionLayout.Add(this.dyScaleNumeric);
 		global::Gtk.Fixed.FixedChild w55 = ((global::Gtk.Fixed.FixedChild)(this.editRegionLayout[this.dyScaleNumeric]));
@@ -711,10 +711,10 @@ public partial class MainWindow
 		this.dxScale = new global::Gtk.HScale(null);
 		this.dxScale.WidthRequest = 100;
 		this.dxScale.Name = "dxScale";
-		this.dxScale.Adjustment.Lower = -800;
-		this.dxScale.Adjustment.Upper = 1600;
-		this.dxScale.Adjustment.PageIncrement = 10;
-		this.dxScale.Adjustment.StepIncrement = 1;
+		this.dxScale.Adjustment.Lower = -800D;
+		this.dxScale.Adjustment.Upper = 1600D;
+		this.dxScale.Adjustment.PageIncrement = 10D;
+		this.dxScale.Adjustment.StepIncrement = 1D;
 		this.dxScale.DrawValue = false;
 		this.dxScale.Digits = 0;
 		this.dxScale.ValuePos = ((global::Gtk.PositionType)(2));
@@ -725,10 +725,10 @@ public partial class MainWindow
 		this.dyScale = new global::Gtk.HScale(null);
 		this.dyScale.WidthRequest = 100;
 		this.dyScale.Name = "dyScale";
-		this.dyScale.Adjustment.Lower = -800;
-		this.dyScale.Adjustment.Upper = 1600;
-		this.dyScale.Adjustment.PageIncrement = 10;
-		this.dyScale.Adjustment.StepIncrement = 1;
+		this.dyScale.Adjustment.Lower = -800D;
+		this.dyScale.Adjustment.Upper = 1600D;
+		this.dyScale.Adjustment.PageIncrement = 10D;
+		this.dyScale.Adjustment.StepIncrement = 1D;
 		this.dyScale.DrawValue = false;
 		this.dyScale.Digits = 0;
 		this.dyScale.ValuePos = ((global::Gtk.PositionType)(2));
