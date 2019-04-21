@@ -127,6 +127,8 @@ public partial class MainWindow
 
 	private global::Gtk.Button ClearSelected;
 
+	private global::Gtk.Button detectFacesButton;
+
 	protected virtual void Build()
 	{
 		global::Stetic.Gui.Initialize(this);
@@ -163,9 +165,9 @@ public partial class MainWindow
 		this.selectImageButton = new global::Gtk.Button();
 		this.selectImageButton.WidthRequest = 120;
 		this.selectImageButton.HeightRequest = 30;
-		this.selectImageButton.CanFocus = true;
 		this.selectImageButton.Name = "selectImageButton";
 		this.selectImageButton.UseUnderline = true;
+		this.selectImageButton.FocusOnClick = false;
 		this.selectImageButton.Label = global::Mono.Unix.Catalog.GetString("select image");
 		this.MainLayout.Add(this.selectImageButton);
 		global::Gtk.Fixed.FixedChild w3 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.selectImageButton]));
@@ -173,7 +175,6 @@ public partial class MainWindow
 		w3.Y = 20;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.quitButton = new global::Gtk.Button();
-		this.quitButton.CanFocus = true;
 		this.quitButton.Name = "quitButton";
 		this.quitButton.UseUnderline = true;
 		this.quitButton.Label = global::Mono.Unix.Catalog.GetString("Quit");
@@ -339,6 +340,7 @@ public partial class MainWindow
 		this.markerColor.WidthRequest = 120;
 		this.markerColor.Events = ((global::Gdk.EventMask)(784));
 		this.markerColor.Name = "markerColor";
+		this.markerColor.FocusOnClick = false;
 		this.MainLayout.Add(this.markerColor);
 		global::Gtk.Fixed.FixedChild w21 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.markerColor]));
 		w21.X = 840;
@@ -392,9 +394,9 @@ public partial class MainWindow
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.detectCirclesButton = new global::Gtk.Button();
 		this.detectCirclesButton.WidthRequest = 120;
-		this.detectCirclesButton.CanFocus = true;
 		this.detectCirclesButton.Name = "detectCirclesButton";
 		this.detectCirclesButton.UseUnderline = true;
+		this.detectCirclesButton.FocusOnClick = false;
 		this.detectCirclesButton.Label = global::Mono.Unix.Catalog.GetString("Hough circles");
 		this.MainLayout.Add(this.detectCirclesButton);
 		global::Gtk.Fixed.FixedChild w27 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.detectCirclesButton]));
@@ -403,9 +405,9 @@ public partial class MainWindow
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.detectBlobsButton = new global::Gtk.Button();
 		this.detectBlobsButton.WidthRequest = 120;
-		this.detectBlobsButton.CanFocus = true;
 		this.detectBlobsButton.Name = "detectBlobsButton";
 		this.detectBlobsButton.UseUnderline = true;
+		this.detectBlobsButton.FocusOnClick = false;
 		this.detectBlobsButton.Label = global::Mono.Unix.Catalog.GetString("Edge/Polygon");
 		this.MainLayout.Add(this.detectBlobsButton);
 		global::Gtk.Fixed.FixedChild w28 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.detectBlobsButton]));
@@ -414,9 +416,9 @@ public partial class MainWindow
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.blobDetectorButton = new global::Gtk.Button();
 		this.blobDetectorButton.WidthRequest = 120;
-		this.blobDetectorButton.CanFocus = true;
 		this.blobDetectorButton.Name = "blobDetectorButton";
 		this.blobDetectorButton.UseUnderline = true;
+		this.blobDetectorButton.FocusOnClick = false;
 		this.blobDetectorButton.Label = global::Mono.Unix.Catalog.GetString("Blobs");
 		this.MainLayout.Add(this.blobDetectorButton);
 		global::Gtk.Fixed.FixedChild w29 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.blobDetectorButton]));
@@ -425,10 +427,10 @@ public partial class MainWindow
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.simpleBlobDetector = new global::Gtk.Button();
 		this.simpleBlobDetector.WidthRequest = 120;
-		this.simpleBlobDetector.CanFocus = true;
 		this.simpleBlobDetector.Name = "simpleBlobDetector";
 		this.simpleBlobDetector.UseUnderline = true;
-		this.simpleBlobDetector.Label = global::Mono.Unix.Catalog.GetString("simple");
+		this.simpleBlobDetector.FocusOnClick = false;
+		this.simpleBlobDetector.Label = global::Mono.Unix.Catalog.GetString("Simple");
 		this.MainLayout.Add(this.simpleBlobDetector);
 		global::Gtk.Fixed.FixedChild w30 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.simpleBlobDetector]));
 		w30.X = 840;
@@ -488,7 +490,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.sx);
 		global::Gtk.Fixed.FixedChild w35 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sx]));
 		w35.X = 840;
-		w35.Y = 520;
+		w35.Y = 550;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.sy = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.sy.WidthRequest = 120;
@@ -499,7 +501,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.sy);
 		global::Gtk.Fixed.FixedChild w36 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sy]));
 		w36.X = 840;
-		w36.Y = 550;
+		w36.Y = 580;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.sxLabel = new global::Gtk.Label();
 		this.sxLabel.Name = "sxLabel";
@@ -507,7 +509,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.sxLabel);
 		global::Gtk.Fixed.FixedChild w37 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sxLabel]));
 		w37.X = 970;
-		w37.Y = 525;
+		w37.Y = 555;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.syLabel = new global::Gtk.Label();
 		this.syLabel.Name = "syLabel";
@@ -515,7 +517,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.syLabel);
 		global::Gtk.Fixed.FixedChild w38 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.syLabel]));
 		w38.X = 970;
-		w38.Y = 555;
+		w38.Y = 585;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.sigmaX = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.sigmaX.WidthRequest = 120;
@@ -526,7 +528,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.sigmaX);
 		global::Gtk.Fixed.FixedChild w39 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sigmaX]));
 		w39.X = 840;
-		w39.Y = 580;
+		w39.Y = 610;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.sigmaY = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.sigmaY.WidthRequest = 120;
@@ -537,7 +539,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.sigmaY);
 		global::Gtk.Fixed.FixedChild w40 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sigmaY]));
 		w40.X = 840;
-		w40.Y = 610;
+		w40.Y = 640;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.sigmaXLabel = new global::Gtk.Label();
 		this.sigmaXLabel.Name = "sigmaXLabel";
@@ -545,7 +547,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.sigmaXLabel);
 		global::Gtk.Fixed.FixedChild w41 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sigmaXLabel]));
 		w41.X = 970;
-		w41.Y = 585;
+		w41.Y = 615;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.sigmaYLabel = new global::Gtk.Label();
 		this.sigmaYLabel.Name = "sigmaYLabel";
@@ -553,7 +555,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.sigmaYLabel);
 		global::Gtk.Fixed.FixedChild w42 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.sigmaYLabel]));
 		w42.X = 970;
-		w42.Y = 615;
+		w42.Y = 645;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.normalize = new global::Gtk.CheckButton();
 		this.normalize.CanFocus = true;
@@ -577,9 +579,9 @@ public partial class MainWindow
 		w44.Y = 625;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.saveProcessedImage = new global::Gtk.Button();
-		this.saveProcessedImage.CanFocus = true;
 		this.saveProcessedImage.Name = "saveProcessedImage";
 		this.saveProcessedImage.UseUnderline = true;
+		this.saveProcessedImage.FocusOnClick = false;
 		this.saveProcessedImage.Label = global::Mono.Unix.Catalog.GetString("Save Processed Image");
 		this.MainLayout.Add(this.saveProcessedImage);
 		global::Gtk.Fixed.FixedChild w45 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.saveProcessedImage]));
@@ -689,7 +691,6 @@ public partial class MainWindow
 		w54.Y = 5;
 		// Container child editRegionLayout.Gtk.Fixed+FixedChild
 		this.dyScaleNumeric = new global::Gtk.SpinButton(-800D, 1600D, 1D);
-		this.dyScaleNumeric.CanFocus = true;
 		this.dyScaleNumeric.Name = "dyScaleNumeric";
 		this.dyScaleNumeric.Adjustment.PageIncrement = 10D;
 		this.dyScaleNumeric.ClimbRate = 1D;
@@ -751,7 +752,6 @@ public partial class MainWindow
 		w60.Y = 660;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.ClearSelected = new global::Gtk.Button();
-		this.ClearSelected.CanFocus = true;
 		this.ClearSelected.Name = "ClearSelected";
 		this.ClearSelected.UseUnderline = true;
 		this.ClearSelected.FocusOnClick = false;
@@ -760,6 +760,17 @@ public partial class MainWindow
 		global::Gtk.Fixed.FixedChild w61 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.ClearSelected]));
 		w61.X = 445;
 		w61.Y = 625;
+		// Container child MainLayout.Gtk.Fixed+FixedChild
+		this.detectFacesButton = new global::Gtk.Button();
+		this.detectFacesButton.WidthRequest = 120;
+		this.detectFacesButton.Name = "detectFacesButton";
+		this.detectFacesButton.UseUnderline = true;
+		this.detectFacesButton.FocusOnClick = false;
+		this.detectFacesButton.Label = global::Mono.Unix.Catalog.GetString("Faces");
+		this.MainLayout.Add(this.detectFacesButton);
+		global::Gtk.Fixed.FixedChild w62 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.detectFacesButton]));
+		w62.X = 840;
+		w62.Y = 515;
 		this.Add(this.MainLayout);
 		if ((this.Child != null))
 		{
@@ -801,5 +812,6 @@ public partial class MainWindow
 		this.dyScale.ValueChanged += new global::System.EventHandler(this.ScaleMoveEvent);
 		this.closeEditButton.Clicked += new global::System.EventHandler(this.CloseEdit);
 		this.ClearSelected.Clicked += new global::System.EventHandler(this.ClearRegions);
+		this.detectFacesButton.Clicked += new global::System.EventHandler(this.OnDetectFacesButtonClicked);
 	}
 }

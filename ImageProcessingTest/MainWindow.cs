@@ -1,3 +1,5 @@
+using Emgu.CV;
+using Emgu.CV.Structure;
 using Gdk;
 using GLib;
 using Gtk;
@@ -609,6 +611,45 @@ public partial class MainWindow : Gtk.Window
         });
     }
 
+
+    protected void OnDetectFacesButtonClicked(object sender, EventArgs e)
+    {
+        HideEdit();
+
+        Application.Invoke(delegate
+        {
+            using (var mat = cv.ToMat(OriginalImage))
+            {
+                var _cascadeClassifier = new CascadeClassifier("haarcascade_frontalface_default.xml");
+
+                var img = mat.ToImage<Bgr, byte>();
+                var grayFrame = cv.ConvertToGray(img);
+
+                var faces = _cascadeClassifier.DetectMultiScale(grayFrame, 1.1, 4, new System.Drawing.Size(OriginalImage.Width / 16, OriginalImage.Height / 16));
+
+                GtkSelection.Selection.Clear();
+
+                if (faces.Length > 0)
+                {
+                    var ScaleX = Convert.ToDouble(imageBox.WidthRequest) / OriginalImage.Width;
+                    var ScaleY = Convert.ToDouble(imageBox.HeightRequest) / OriginalImage.Height;
+
+                    foreach (var face in faces)
+                    {
+                        var x0 = Convert.ToInt32(ScaleX * face.X);
+                        var y0 = Convert.ToInt32(ScaleY * face.Y);
+                        var x1 = Convert.ToInt32(ScaleX * (face.X + face.Width - 1));
+                        var y1 = Convert.ToInt32(ScaleY * (face.Y + face.Height - 1));
+
+                        GtkSelection.Selection.Add(x0, y0, x1, y1);
+                    }
+                }
+
+                cv.Throw(grayFrame, img);
+            }
+        });
+    }
+
     protected void OnSubtractBgToggled(object o, EventArgs e)
     {
         cv.SubtractBackground = subtractBg.Active;
@@ -742,7 +783,7 @@ public partial class MainWindow : Gtk.Window
                     var ScaleX = Convert.ToDouble(OriginalImage.Width) / imageBox.WidthRequest;
                     var ScaleY = Convert.ToDouble(OriginalImage.Height) / imageBox.HeightRequest;
 
-                    using (Pixbuf pb = GtkSelection.Render(OriginalImage, cv, GtkSelection.MarkerColor, GtkSelection.Selected, GtkSelection.SelectedColor, false, true, ScaleX, ScaleY))
+                    using (Pixbuf pb = GtkSelection.Render(OriginalImage, cv, markerColor.Color, GtkSelection.Selected, GtkSelection.SelectedColor, false, true, ScaleX, ScaleY))
                     {
                         if (imageBox.Pixbuf != null && pb != null)
                         {

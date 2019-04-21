@@ -1485,7 +1485,7 @@ public class OpenCV : ImageProcessing, IDisposable
         return ToPixbuf(Flip(ToMat(src), flipCode));
     }
 
-    void Throw(params IDisposable[] trash)
+    public void Throw(params IDisposable[] trash)
     {
         foreach (var item in trash)
         {

@@ -47,10 +47,10 @@
             <property name="MemberName" />
             <property name="WidthRequest">120</property>
             <property name="HeightRequest">30</property>
-            <property name="CanFocus">True</property>
             <property name="Type">TextOnly</property>
             <property name="Label" translatable="yes">select image</property>
             <property name="UseUnderline">True</property>
+            <property name="FocusOnClick">False</property>
             <signal name="Clicked" handler="OnSelectImageButtonClicked" />
           </widget>
           <packing>
@@ -61,7 +61,6 @@
         <child>
           <widget class="Gtk.Button" id="quitButton">
             <property name="MemberName" />
-            <property name="CanFocus">True</property>
             <property name="Type">TextOnly</property>
             <property name="Label" translatable="yes">Quit</property>
             <property name="UseUnderline">True</property>
@@ -279,6 +278,7 @@
             <property name="WidthRequest">120</property>
             <property name="Events">ButtonMotionMask, ButtonPressMask, ButtonReleaseMask</property>
             <property name="Alpha">-1</property>
+            <property name="FocusOnClick">False</property>
           </widget>
           <packing>
             <property name="X">840</property>
@@ -350,10 +350,10 @@
           <widget class="Gtk.Button" id="detectCirclesButton">
             <property name="MemberName" />
             <property name="WidthRequest">120</property>
-            <property name="CanFocus">True</property>
             <property name="Type">TextOnly</property>
             <property name="Label" translatable="yes">Hough circles</property>
             <property name="UseUnderline">True</property>
+            <property name="FocusOnClick">False</property>
             <signal name="Clicked" handler="OnDetectCirclesButtonClicked" />
           </widget>
           <packing>
@@ -365,10 +365,10 @@
           <widget class="Gtk.Button" id="detectBlobsButton">
             <property name="MemberName" />
             <property name="WidthRequest">120</property>
-            <property name="CanFocus">True</property>
             <property name="Type">TextOnly</property>
             <property name="Label" translatable="yes">Edge/Polygon</property>
             <property name="UseUnderline">True</property>
+            <property name="FocusOnClick">False</property>
             <signal name="Clicked" handler="OnDetectBlobsButtonClicked" />
           </widget>
           <packing>
@@ -380,10 +380,10 @@
           <widget class="Gtk.Button" id="blobDetectorButton">
             <property name="MemberName" />
             <property name="WidthRequest">120</property>
-            <property name="CanFocus">True</property>
             <property name="Type">TextOnly</property>
             <property name="Label" translatable="yes">Blobs</property>
             <property name="UseUnderline">True</property>
+            <property name="FocusOnClick">False</property>
             <signal name="Clicked" handler="OnBlobDetectorButtonClicked" />
           </widget>
           <packing>
@@ -395,10 +395,10 @@
           <widget class="Gtk.Button" id="simpleBlobDetector">
             <property name="MemberName" />
             <property name="WidthRequest">120</property>
-            <property name="CanFocus">True</property>
             <property name="Type">TextOnly</property>
-            <property name="Label" translatable="yes">simple</property>
+            <property name="Label" translatable="yes">Simple</property>
             <property name="UseUnderline">True</property>
+            <property name="FocusOnClick">False</property>
             <signal name="Clicked" handler="OnSimpleBlobDetectorClicked" />
           </widget>
           <packing>
@@ -418,7 +418,7 @@
           </widget>
           <packing>
             <property name="X">970</property>
-            <property name="Y">395</property>
+            <property name="Y">425</property>
           </packing>
         </child>
         <child>
@@ -433,7 +433,7 @@
           </widget>
           <packing>
             <property name="X">970</property>
-            <property name="Y">425</property>
+            <property name="Y">455</property>
           </packing>
         </child>
         <child>
@@ -449,7 +449,7 @@
           </widget>
           <packing>
             <property name="X">970</property>
-            <property name="Y">455</property>
+            <property name="Y">485</property>
           </packing>
         </child>
         <child>
@@ -464,7 +464,7 @@
           </widget>
           <packing>
             <property name="X">970</property>
-            <property name="Y">485</property>
+            <property name="Y">515</property>
           </packing>
         </child>
         <child>
@@ -480,7 +480,7 @@
           </widget>
           <packing>
             <property name="X">840</property>
-            <property name="Y">520</property>
+            <property name="Y">550</property>
           </packing>
         </child>
         <child>
@@ -496,7 +496,7 @@
           </widget>
           <packing>
             <property name="X">840</property>
-            <property name="Y">550</property>
+            <property name="Y">580</property>
           </packing>
         </child>
         <child>
@@ -506,7 +506,7 @@
           </widget>
           <packing>
             <property name="X">970</property>
-            <property name="Y">525</property>
+            <property name="Y">555</property>
           </packing>
         </child>
         <child>
@@ -516,7 +516,7 @@
           </widget>
           <packing>
             <property name="X">970</property>
-            <property name="Y">555</property>
+            <property name="Y">585</property>
           </packing>
         </child>
         <child>
@@ -532,7 +532,7 @@
           </widget>
           <packing>
             <property name="X">840</property>
-            <property name="Y">580</property>
+            <property name="Y">610</property>
           </packing>
         </child>
         <child>
@@ -548,7 +548,7 @@
           </widget>
           <packing>
             <property name="X">840</property>
-            <property name="Y">610</property>
+            <property name="Y">640</property>
           </packing>
         </child>
         <child>
@@ -558,7 +558,7 @@
           </widget>
           <packing>
             <property name="X">970</property>
-            <property name="Y">585</property>
+            <property name="Y">615</property>
           </packing>
         </child>
         <child>
@@ -568,7 +568,7 @@
           </widget>
           <packing>
             <property name="X">970</property>
-            <property name="Y">615</property>
+            <property name="Y">645</property>
           </packing>
         </child>
         <child>
@@ -583,7 +583,7 @@
           </widget>
           <packing>
             <property name="X">1120</property>
-            <property name="Y">395</property>
+            <property name="Y">425</property>
           </packing>
         </child>
         <child>
@@ -603,10 +603,10 @@
         <child>
           <widget class="Gtk.Button" id="saveProcessedImage">
             <property name="MemberName" />
-            <property name="CanFocus">True</property>
             <property name="Type">TextOnly</property>
             <property name="Label" translatable="yes">Save Processed Image</property>
             <property name="UseUnderline">True</property>
+            <property name="FocusOnClick">False</property>
             <signal name="Clicked" handler="OnSaveProcessedImageClicked" />
           </widget>
           <packing>
@@ -753,7 +753,6 @@
             <child>
               <widget class="Gtk.SpinButton" id="dyScaleNumeric">
                 <property name="MemberName" />
-                <property name="CanFocus">True</property>
                 <property name="Lower">-800</property>
                 <property name="Upper">1600</property>
                 <property name="PageIncrement">10</property>
@@ -835,7 +834,6 @@
         <child>
           <widget class="Gtk.Button" id="ClearSelected">
             <property name="MemberName" />
-            <property name="CanFocus">True</property>
             <property name="Type">TextOnly</property>
             <property name="Label" translatable="yes">Clear Selection</property>
             <property name="UseUnderline">True</property>
@@ -845,6 +843,21 @@
           <packing>
             <property name="X">445</property>
             <property name="Y">625</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Button" id="detectFacesButton">
+            <property name="MemberName" />
+            <property name="WidthRequest">120</property>
+            <property name="Type">TextOnly</property>
+            <property name="Label" translatable="yes">Faces</property>
+            <property name="UseUnderline">True</property>
+            <property name="FocusOnClick">False</property>
+            <signal name="Clicked" handler="OnDetectFacesButtonClicked" />
+          </widget>
+          <packing>
+            <property name="X">840</property>
+            <property name="Y">515</property>
           </packing>
         </child>
       </widget>
