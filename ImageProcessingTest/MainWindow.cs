@@ -419,10 +419,6 @@ public partial class MainWindow : Gtk.Window
         );
 
         ImageSaver.AddFilter(AddFilter("png", "*.png"));
-        ImageSaver.AddFilter(AddFilter("jpg", "*.jpg", "*.jpeg"));
-        ImageSaver.AddFilter(AddFilter("tif", "*.tif", "*.tiff"));
-        ImageSaver.AddFilter(AddFilter("bmp", "*.bmp"));
-        ImageSaver.AddFilter(AddFilter("ico", "*.ico"));
 
         FolderChooser = new FileChooserDialog(
             "Choose the folder where blob images will be saved",
