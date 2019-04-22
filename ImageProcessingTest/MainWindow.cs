@@ -12,6 +12,8 @@ public partial class MainWindow : Gtk.Window
     FileChooserDialog ImageLoader;
     FileChooserDialog ImageSaver;
     FileChooserDialog FolderChooser;
+    FileChooserDialog ClassifierChooser;
+
     Pixbuf OriginalImage;
 
     OpenCV cv = new OpenCV();
@@ -29,6 +31,8 @@ public partial class MainWindow : Gtk.Window
     bool CommandControl;
 
     Mutex Rendering = new Mutex();
+
+    string Classifier = "haarcascade_frontalface_default.xml";
 
     public MainWindow() : base(Gtk.WindowType.Toplevel)
     {
@@ -384,13 +388,18 @@ public partial class MainWindow : Gtk.Window
         }
     }
 
+    protected FileFilter AddFilter(string name, params string[] patterns)
+    {
+        var filter = new FileFilter() { Name = name };
+
+        foreach (var pattern in patterns)
+            filter.AddPattern(pattern);
+
+        return filter;
+    }
+
     protected void InitializeComponents()
     {
-        var filters = new FileFilter();
-
-        filters.AddPattern("*.png");
-        filters.AddPattern("*.jpg");
-
         ImageLoader = new FileChooserDialog(
             "Choose the Image to open",
             this,
@@ -399,7 +408,7 @@ public partial class MainWindow : Gtk.Window
             "Cancel", ResponseType.Cancel
         );
 
-        ImageLoader.AddFilter(filters);
+        ImageLoader.AddFilter(AddFilter("Image files (png/jpg/jpeg/tif/tiff/bmp/gif/ico/xpm/icns/pgm)", "*.png", "*.jpg", "*.jpeg", "*.tif", "*.tiff", "*.bmp", "*.gif", "*.ico", "*.xpm", "*.icns", "*.pgm"));
 
         ImageSaver = new FileChooserDialog(
             "Save Processed Image",
@@ -409,7 +418,11 @@ public partial class MainWindow : Gtk.Window
             "Cancel", ResponseType.Cancel
         );
 
-        ImageSaver.AddFilter(filters);
+        ImageSaver.AddFilter(AddFilter("png", "*.png"));
+        ImageSaver.AddFilter(AddFilter("jpg", "*.jpg", "*.jpeg"));
+        ImageSaver.AddFilter(AddFilter("tif", "*.tif", "*.tiff"));
+        ImageSaver.AddFilter(AddFilter("bmp", "*.bmp"));
+        ImageSaver.AddFilter(AddFilter("ico", "*.ico"));
 
         FolderChooser = new FileChooserDialog(
             "Choose the folder where blob images will be saved",
@@ -418,8 +431,17 @@ public partial class MainWindow : Gtk.Window
             "Save", ResponseType.Accept,
             "Cancel", ResponseType.Cancel
         );
-    }
 
+        ClassifierChooser = new FileChooserDialog(
+            "Choose the Classifier to open",
+            this,
+            FileChooserAction.Open,
+            "Open", ResponseType.Accept,
+            "Cancel", ResponseType.Cancel
+        );
+
+        ClassifierChooser.AddFilter(AddFilter("Classifiers (xml)", "*.xml"));
+    }
 
     protected void InitializeDefaults()
     {
@@ -620,7 +642,7 @@ public partial class MainWindow : Gtk.Window
         {
             using (var mat = cv.ToMat(OriginalImage))
             {
-                var _cascadeClassifier = new CascadeClassifier("haarcascade_frontalface_default.xml");
+                var _cascadeClassifier = new CascadeClassifier(Classifier);
 
                 var img = mat.ToImage<Bgr, byte>();
                 var grayFrame = cv.ConvertToGray(img);
@@ -629,7 +651,7 @@ public partial class MainWindow : Gtk.Window
                 var minSize = Convert.ToInt32(minArea.Value);
 
                 if (sf > 1.0)
-                { 
+                {
                     var faces = _cascadeClassifier.DetectMultiScale(grayFrame, sf, neighbors, new System.Drawing.Size(minSize, minSize));
 
                     GtkSelection.Selection.Clear();
@@ -901,5 +923,30 @@ public partial class MainWindow : Gtk.Window
     protected void OnMarkerSizeValueChanged(object o, EventArgs e)
     {
         GtkSelection.MarkerSize = Convert.ToInt32(markerSize.Value);
+    }
+
+    protected void OnSelectClassifierButtonClicked(object sender, EventArgs e)
+    {
+        ClassifierChooser.Title = "Select Classifier";
+
+        if (!string.IsNullOrEmpty(ClassifierChooser.Filename))
+        {
+            var directory = System.IO.Path.GetDirectoryName(ClassifierChooser.Filename);
+
+            if (Directory.Exists(directory))
+            {
+                ClassifierChooser.SetCurrentFolder(directory);
+            }
+        }
+
+        if (ClassifierChooser.Run() == Convert.ToInt32(ResponseType.Accept))
+        {
+            if (!string.IsNullOrEmpty(ClassifierChooser.Filename))
+            {
+                Classifier = ClassifierChooser.Filename;
+            }
+        }
+
+        ClassifierChooser.Hide();
     }
 }

@@ -416,7 +416,7 @@
           </widget>
           <packing>
             <property name="X">970</property>
-            <property name="Y">455</property>
+            <property name="Y">425</property>
           </packing>
         </child>
         <child>
@@ -431,7 +431,7 @@
           </widget>
           <packing>
             <property name="X">970</property>
-            <property name="Y">485</property>
+            <property name="Y">455</property>
           </packing>
         </child>
         <child>
@@ -447,7 +447,7 @@
           </widget>
           <packing>
             <property name="X">970</property>
-            <property name="Y">515</property>
+            <property name="Y">485</property>
           </packing>
         </child>
         <child>
@@ -461,8 +461,8 @@
             <signal name="Toggled" handler="OnGaussianBlurToggled" />
           </widget>
           <packing>
-            <property name="X">970</property>
-            <property name="Y">545</property>
+            <property name="X">1080</property>
+            <property name="Y">585</property>
           </packing>
         </child>
         <child>
@@ -581,7 +581,7 @@
           </widget>
           <packing>
             <property name="X">1120</property>
-            <property name="Y">455</property>
+            <property name="Y">425</property>
           </packing>
         </child>
         <child>
@@ -911,6 +911,21 @@
           <packing>
             <property name="X">970</property>
             <property name="Y">335</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Button" id="selectClassifierButton">
+            <property name="MemberName" />
+            <property name="WidthRequest">120</property>
+            <property name="Type">TextOnly</property>
+            <property name="Label" translatable="yes">select classifier</property>
+            <property name="UseUnderline">True</property>
+            <property name="FocusOnClick">False</property>
+            <signal name="Clicked" handler="OnSelectClassifierButtonClicked" />
+          </widget>
+          <packing>
+            <property name="X">970</property>
+            <property name="Y">545</property>
           </packing>
         </child>
       </widget>

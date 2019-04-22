@@ -137,6 +137,8 @@ public partial class MainWindow
 
 	private global::Gtk.Label minNeighborsLabel;
 
+	private global::Gtk.Button selectClassifierButton;
+
 	protected virtual void Build()
 	{
 		global::Stetic.Gui.Initialize(this);
@@ -451,7 +453,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.subtractBg);
 		global::Gtk.Fixed.FixedChild w31 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.subtractBg]));
 		w31.X = 970;
-		w31.Y = 455;
+		w31.Y = 425;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.imgInvert = new global::Gtk.CheckButton();
 		this.imgInvert.CanFocus = true;
@@ -462,7 +464,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.imgInvert);
 		global::Gtk.Fixed.FixedChild w32 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.imgInvert]));
 		w32.X = 970;
-		w32.Y = 485;
+		w32.Y = 455;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.downUpSample = new global::Gtk.CheckButton();
 		this.downUpSample.CanFocus = true;
@@ -474,7 +476,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.downUpSample);
 		global::Gtk.Fixed.FixedChild w33 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.downUpSample]));
 		w33.X = 970;
-		w33.Y = 515;
+		w33.Y = 485;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.gaussianBlur = new global::Gtk.CheckButton();
 		this.gaussianBlur.Name = "gaussianBlur";
@@ -484,8 +486,8 @@ public partial class MainWindow
 		this.gaussianBlur.FocusOnClick = false;
 		this.MainLayout.Add(this.gaussianBlur);
 		global::Gtk.Fixed.FixedChild w34 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.gaussianBlur]));
-		w34.X = 970;
-		w34.Y = 545;
+		w34.X = 1080;
+		w34.Y = 585;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.sx = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.sx.WidthRequest = 120;
@@ -572,7 +574,7 @@ public partial class MainWindow
 		this.MainLayout.Add(this.normalize);
 		global::Gtk.Fixed.FixedChild w43 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.normalize]));
 		w43.X = 1120;
-		w43.Y = 455;
+		w43.Y = 425;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.saveBlobsButton = new global::Gtk.Button();
 		this.saveBlobsButton.Name = "saveBlobsButton";
@@ -818,6 +820,17 @@ public partial class MainWindow
 		global::Gtk.Fixed.FixedChild w66 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.minNeighborsLabel]));
 		w66.X = 970;
 		w66.Y = 335;
+		// Container child MainLayout.Gtk.Fixed+FixedChild
+		this.selectClassifierButton = new global::Gtk.Button();
+		this.selectClassifierButton.CanFocus = true;
+		this.selectClassifierButton.Name = "selectClassifierButton";
+		this.selectClassifierButton.UseUnderline = true;
+		this.selectClassifierButton.FocusOnClick = false;
+		this.selectClassifierButton.Label = global::Mono.Unix.Catalog.GetString("select classifier");
+		this.MainLayout.Add(this.selectClassifierButton);
+		global::Gtk.Fixed.FixedChild w67 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.selectClassifierButton]));
+		w67.X = 970;
+		w67.Y = 545;
 		this.Add(this.MainLayout);
 		if ((this.Child != null))
 		{
@@ -860,5 +873,6 @@ public partial class MainWindow
 		this.closeEditButton.Clicked += new global::System.EventHandler(this.CloseEdit);
 		this.ClearSelected.Clicked += new global::System.EventHandler(this.ClearRegions);
 		this.detectFacesButton.Clicked += new global::System.EventHandler(this.OnDetectFacesButtonClicked);
+		this.selectClassifierButton.Clicked += new global::System.EventHandler(this.OnSelectClassifierButtonClicked);
 	}
 }
