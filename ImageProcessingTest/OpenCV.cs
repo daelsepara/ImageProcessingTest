@@ -7,9 +7,11 @@ using Emgu.CV.Cvb;
 using Gdk;
 using System;
 using System.Collections.Generic;
+#if _LINUX || _WIN32
 using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.IO;
+#endif
 using System.Runtime.InteropServices;
 
 public class OpenCV : ImageProcessing, IDisposable
@@ -151,6 +153,7 @@ public class OpenCV : ImageProcessing, IDisposable
         return dest;
     }
 
+#if _LINUX || _WIN32
     /// <summary>
     /// Convert an OpenCV matrix to Bitmap
     /// </summary>
@@ -163,7 +166,9 @@ public class OpenCV : ImageProcessing, IDisposable
 
         return src.Bitmap;
     }
+#endif
 
+#if _LINUX || _WIN32
     /// <summary>
     /// Convert a Gdk Pixbuf to Bitmap
     /// </summary>
@@ -181,7 +186,9 @@ public class OpenCV : ImageProcessing, IDisposable
 
         return new Bitmap(stream);
     }
+#endif
 
+#if _LINUX || _WIN32
     /// <summary>
     /// Convert a Bitmap to a Gdk Pixbuf
     /// </summary>
@@ -190,6 +197,7 @@ public class OpenCV : ImageProcessing, IDisposable
     public Pixbuf ToPixbuf(Bitmap src)
     {
         Contract.Ensures(Contract.Result<Pixbuf>() != null);
+        
         if (src == null)
             return null;
 
@@ -202,6 +210,7 @@ public class OpenCV : ImageProcessing, IDisposable
             return new Pixbuf(stream);
         }
     }
+#endif
 
     /// <summary>
     /// Convert an OpenCV matrix to a Gdk Pixbuf with optional alpha channel.
@@ -261,6 +270,7 @@ public class OpenCV : ImageProcessing, IDisposable
         return ToPixbufNoCC(src, false);
     }
 
+#if _LINUX || _WIN32
     /// <summary>
     /// Convert a Bitmap to an OpenCV matrix
     /// Does not perform any color conversion
@@ -276,6 +286,7 @@ public class OpenCV : ImageProcessing, IDisposable
 
         return (nframe != null && nframe.GetData() != null) ? Rgb2Bgr(nframe) : null;
     }
+#endif
 
     /// <summary>
     /// Load an image into an OpenCV matrix
@@ -343,47 +354,47 @@ public class OpenCV : ImageProcessing, IDisposable
 
         try
         {
-            #region convert the image to grayscale
+#region convert the image to grayscale
             var img = src.ToImage<Bgr, Byte>();
             var uimage = DownUpSample ? NoiseFilter(img) : ConvertToGray(img);
-            #endregion
+#endregion
 
-            #region invert gray colors
+#region invert gray colors
             if (Invert)
                 GrayInvert(uimage);
-            #endregion
+#endregion
 
-            #region normalize
+#region normalize
             if (Normalize)
                 NormalizeGray(uimage);
-            #endregion
+#endregion
 
-            #region apply Gaussian blur
+#region apply Gaussian blur
             var smoothedFrame = Blur ? GaussianBlur(uimage, sx, sy, sigmaX, sigmaY) : uimage.Clone();
-            #endregion
+#endregion
 
             CircleF[] circles;
 
-            #region edge detection and Hough circle transform
+#region edge detection and Hough circle transform
             if (SubtractBackground)
             {
-                #region detect background
+#region detect background
                 var foregroundMask = BackgroundSubtract(smoothedFrame);
-                #endregion
+#endregion
 
                 circles = CvInvoke.HoughCircles(foregroundMask, HoughType.Gradient, dp, minDist, cannyThreshold, circleAccumulatorThreshold, minRadius, maxRadius);
 
-                #region cleanup
+#region cleanup
                 Throw(foregroundMask);
-                #endregion
+#endregion
             }
             else
             {
                 circles = CvInvoke.HoughCircles(smoothedFrame, HoughType.Gradient, dp, minDist, cannyThreshold, circleAccumulatorThreshold, minRadius, maxRadius);
             }
-            #endregion
+#endregion
 
-            #region draw circles
+#region draw circles
             recentCircles.Clear();
 
             if (circles.Length > 0)
@@ -396,23 +407,23 @@ public class OpenCV : ImageProcessing, IDisposable
                     recentCircles.Add(circle);
                 }
             }
-            #endregion
+#endregion
 
             CvInvoke.CvtColor(img.Mat, nframe, ColorConversion.Bgr2Rgb);
 
-            #region cleanup
+#region cleanup
             Throw(img, uimage, smoothedFrame);
 
             CollectGarbage();
-            #endregion
+#endregion
         }
         catch (Exception e)
         {
             Console.WriteLine("Error: {0}", e.Message);
 
-            #region cleanup
+#region cleanup
             CollectGarbage();
-            #endregion
+#endregion
 
             return src;
         }
@@ -420,6 +431,7 @@ public class OpenCV : ImageProcessing, IDisposable
         return nframe;
     }
 
+#if _LINUX || _WIN32
     /// <summary>
     /// Detects circles on an OpenCV matrix using Hough Circles Transform.
     /// Performs color conversion from BGR to RGB
@@ -438,6 +450,7 @@ public class OpenCV : ImageProcessing, IDisposable
     {
         return ToBitmap(DetectCirclesMat(src, dp, minDist, cannyThreshold, circleAccumulatorThreshold, minRadius, maxRadius, markerColor, markerSize));
     }
+#endif
 
     /// <summary>
     /// Detects circles on an OpenCV matrix using Hough Circles Transform.
@@ -476,67 +489,67 @@ public class OpenCV : ImageProcessing, IDisposable
 
         try
         {
-            #region convert to gray scale
+#region convert to gray scale
             var img = src.ToImage<Bgr, Byte>();
             var uimage = DownUpSample ? NoiseFilter(img) : ConvertToGray(img);
-            #endregion
+#endregion
 
-            #region invert gray colors
+#region invert gray colors
             if (Invert)
                 GrayInvert(uimage);
-            #endregion
+#endregion
 
-            #region normalize
+#region normalize
             if (Normalize)
                 NormalizeGray(uimage);
-            #endregion
+#endregion
 
-            #region apply Gaussian blur
+#region apply Gaussian blur
             var smoothedFrame = Blur ? GaussianBlur(uimage, sx, sy, sigmaX, sigmaY) : uimage.Clone();
-            #endregion
+#endregion
 
-            #region edge detection
+#region edge detection
             Mat cannyEdges = new Mat();
 
             if (SubtractBackground)
             {
-                #region detect background
+#region detect background
                 var foregroundMask = BackgroundSubtract(smoothedFrame);
-                #endregion
+#endregion
 
                 CvInvoke.Canny(foregroundMask, cannyEdges, cannyThreshold, cannyThresholdLinking);
 
-                #region cleanup
+#region cleanup
                 Throw(foregroundMask);
-                #endregion
+#endregion
             }
             else
             {
                 CvInvoke.Canny(smoothedFrame, cannyEdges, cannyThreshold, cannyThresholdLinking);
             }
-            #endregion
+#endregion
 
-            #region find contours
+#region find contours
             var contours = new VectorOfVectorOfPoint();
             CvInvoke.FindContours(cannyEdges, contours, null, RetrType.List, ChainApproxMethod.ChainApproxSimple);
-            #endregion
+#endregion
 
-            #region plot contours
+#region plot contours
             if (contours != null && contours.Size > 0)
             {
                 recentRectangles.Clear();
 
                 for (int i = 0; i < contours.Size; i++)
                 {
-                    #region polygon approximation
+#region polygon approximation
                     var contour = contours[i];
                     var approxContour = new VectorOfPoint();
                     var length = CvInvoke.ArcLength(contour, true) * 0.015;
 
                     CvInvoke.ApproxPolyDP(contour, approxContour, length, true);
-                    #endregion
+#endregion
 
-                    #region filter by area
+#region filter by area
                     var area = CvInvoke.ContourArea(approxContour, false);
 
                     if (area >= minArea && area < maxArea) //only consider contours with areas greather than this
@@ -547,7 +560,7 @@ public class OpenCV : ImageProcessing, IDisposable
 
                         recentRectangles.Add(rectangle);
                     }
-                    #endregion
+#endregion
                 }
 
                 CvInvoke.CvtColor(img.Mat, nframe, ColorConversion.Bgr2Rgb);
@@ -556,21 +569,21 @@ public class OpenCV : ImageProcessing, IDisposable
             {
                 CvInvoke.CvtColor(src, nframe, ColorConversion.Bgr2Rgb);
             }
-            #endregion
+#endregion
 
-            #region cleanup
+#region cleanup
             Throw(cannyEdges, contours, smoothedFrame, img, uimage);
 
             CollectGarbage();
-            #endregion
+#endregion
         }
         catch (Exception e)
         {
             Console.WriteLine("Error: {0}", e.Message);
 
-            #region cleanup
+#region cleanup
             CollectGarbage();
-            #endregion
+#endregion
 
             return src;
         }
@@ -594,6 +607,7 @@ public class OpenCV : ImageProcessing, IDisposable
         return ToPixbufNoCC(DetectBlobsMat(src, cannyThreshold, cannyThresholdLinking, minArea, maxArea, markerColor, markerSize));
     }
 
+#if _LINUX || _WIN32
     /// <summary>
     /// Detects blobs using Canny edge detection and contour detection.
     /// The smallest value between threshold1 and threshold2 is used for edge linking. The largest value is used to find initial segments of strong edges.
@@ -609,6 +623,7 @@ public class OpenCV : ImageProcessing, IDisposable
     {
         return ToBitmap(DetectBlobsMat(src, cannyThreshold, cannyThresholdLinking, minArea, maxArea, markerColor, markerSize));
     }
+#endif
 
     /// <summary>
     /// Detects blobs using Gaussian blurring filter and background subttraction.
@@ -627,39 +642,39 @@ public class OpenCV : ImageProcessing, IDisposable
 
         try
         {
-            #region convert to grayscale
+#region convert to grayscale
             var img = src.ToImage<Bgr, byte>();
             var uimage = DownUpSample ? NoiseFilter(img) : ConvertToGray(img);
-            #endregion
+#endregion
 
-            #region invert gray colors
+#region invert gray colors
             if (Invert)
                 GrayInvert(uimage);
-            #endregion
+#endregion
 
-            #region normalize
+#region normalize
             if (Normalize)
                 NormalizeGray(uimage);
-            #endregion
+#endregion
 
-            #region apply Gaussian blur
+#region apply Gaussian blur
             var smoothedFrame = Blur ? GaussianBlur(uimage, sx, sy, sigmaX, sigmaY) : uimage.Clone();
-            #endregion
+#endregion
 
-            #region detect blobs
+#region detect blobs
             var blobs = new CvBlobs();
 
             if (SubtractBackground)
             {
-                #region detect background
+#region detect background
                 var foregroundMask = BackgroundSubtract(smoothedFrame);
-                #endregion
+#endregion
 
                 _blobDetector.Detect(foregroundMask.ToImage<Gray, byte>(), blobs);
 
-                #region cleanup
+#region cleanup
                 Throw(foregroundMask);
-                #endregion
+#endregion
             }
             else
             {
@@ -667,7 +682,7 @@ public class OpenCV : ImageProcessing, IDisposable
             }
 
             blobs.FilterByArea(minArea, maxArea);
-            #endregion
+#endregion
 
             recentRectangles.Clear();
 
@@ -680,19 +695,19 @@ public class OpenCV : ImageProcessing, IDisposable
 
             CvInvoke.CvtColor(img.Mat, nframe, ColorConversion.Bgr2Rgb);
 
-            #region cleanup
+#region cleanup
             Throw(img, uimage, blobs, smoothedFrame);
 
             CollectGarbage();
-            #endregion
+#endregion
         }
         catch (Exception e)
         {
             Console.WriteLine("Error: {0}", e.Message);
 
-            #region cleanup
+#region cleanup
             CollectGarbage();
-            #endregion
+#endregion
 
             return src;
         }
@@ -700,6 +715,7 @@ public class OpenCV : ImageProcessing, IDisposable
         return nframe;
     }
 
+#if _LINUX || _WIN32
     /// <summary>
     /// Detects blobs using Gaussian blurring filter and background subttraction.
     /// Performs color conversion from BGR to RGB
@@ -714,6 +730,7 @@ public class OpenCV : ImageProcessing, IDisposable
     {
         return ToBitmap(BlobDetectorMat(src, minArea, maxArea, markerColor, markerSize));
     }
+#endif
 
     /// <summary>
     /// Detects blobs using Gaussian blurring filter and background subttraction.
@@ -800,68 +817,68 @@ public class OpenCV : ImageProcessing, IDisposable
 
         try
         {
-            #region convert to grayscale
+#region convert to grayscale
             var img = src.ToImage<Bgr, Byte>();
             var uimage = DownUpSample ? NoiseFilter(img) : ConvertToGray(img);
-            #endregion
+#endregion
 
-            #region invert gray colors
+#region invert gray colors
             if (Invert)
                 GrayInvert(uimage);
-            #endregion
+#endregion
 
-            #region normalize
+#region normalize
             if (Normalize)
                 NormalizeGray(uimage);
-            #endregion
+#endregion
 
-            #region apply Gaussian blur
+#region apply Gaussian blur
             var smoothedFrame = Blur ? GaussianBlur(uimage, sx, sy, sigmaX, sigmaY) : uimage.Clone();
-            #endregion
+#endregion
 
-            #region edge detection
+#region edge detection
             if (SubtractBackground)
             {
 
-                #region detect background
+#region detect background
                 var foregroundMask = BackgroundSubtract(smoothedFrame);
-                #endregion
+#endregion
 
-                #region detect keypoints
+#region detect keypoints
                 keypoints = _simpleBlobDetector.Detect(foregroundMask);
-                #endregion
+#endregion
 
-                #region cleanup
+#region cleanup
                 Throw(foregroundMask);
-                #endregion
+#endregion
             }
             else
             {
-                #region detect keypoints
+#region detect keypoints
                 keypoints = _simpleBlobDetector.Detect(smoothedFrame);
-                #endregion
+#endregion
             }
-            #endregion
+#endregion
 
-            #region draw keypoints
+#region draw keypoints
             Features2DToolbox.DrawKeypoints(img, new VectorOfKeyPoint(keypoints), img, markerColor, Features2DToolbox.KeypointDrawType.DrawRichKeypoints);
-            #endregion
+#endregion
 
             CvInvoke.CvtColor(img.Mat, nframe, ColorConversion.Bgr2Rgb);
 
-            #region cleanup
+#region cleanup
             Throw(smoothedFrame, img, uimage);
 
             CollectGarbage();
-            #endregion
+#endregion
         }
         catch (Exception e)
         {
             Console.WriteLine("Error: {0}", e.Message);
 
-            #region cleanup
+#region cleanup
             CollectGarbage();
-            #endregion
+#endregion
 
             return src;
         }
@@ -882,6 +899,7 @@ public class OpenCV : ImageProcessing, IDisposable
         return ToPixbufNoCC(SimpleBlobDetectionMat(src, markerColor));
     }
 
+#if _LINUX || _WIN32
     /// <summary>
     /// This implements a simple algorithm for extracting blobs from an image
     /// 
@@ -894,6 +912,7 @@ public class OpenCV : ImageProcessing, IDisposable
     {
         return ToBitmap(SimpleBlobDetectionMat(src, markerColor));
     }
+#endif
 
     /// <summary>
     /// Reduces noise by downsampling and then upsampling
@@ -905,11 +924,11 @@ public class OpenCV : ImageProcessing, IDisposable
     {
         var uimage = new Mat();
 
-        #region convert to gray
+#region convert to gray
         CvInvoke.CvtColor(img, uimage, ColorConversion.Bgr2Gray);
-        #endregion
+#endregion
 
-        #region use image pyr to remove noise
+#region use image pyr to remove noise
         var pyrDown = new Mat();
 
         // Downsampling
@@ -918,13 +937,13 @@ public class OpenCV : ImageProcessing, IDisposable
         // Upsampling
         CvInvoke.PyrUp(pyrDown, uimage);
 
-        #endregion
+#endregion
 
-        #region cleanup
+#region cleanup
         Throw(pyrDown);
 
         CollectGarbage();
-        #endregion
+#endregion
 
         return uimage;
     }
@@ -954,18 +973,18 @@ public class OpenCV : ImageProcessing, IDisposable
     /// <returns>OpenCV matrix with background subtracted</returns>
     protected Mat BackgroundSubtract(IOutputArray frame)
     {
-        #region background subtraction
+#region background subtraction
         var foregroundMask = new Mat();
 
         var _fgDetector = new BackgroundSubtractorMOG2();
         _fgDetector.Apply(frame, foregroundMask);
-        #endregion
+#endregion
 
-        #region cleanup
+#region cleanup
         Throw(_fgDetector);
 
         CollectGarbage();
-        #endregion
+#endregion
 
         return foregroundMask;
     }
@@ -1081,9 +1100,9 @@ public class OpenCV : ImageProcessing, IDisposable
         {
             Console.WriteLine("Error: {0}", e.Message);
 
-            #region cleanup
+#region cleanup
             CollectGarbage();
-            #endregion
+#endregion
 
             return src;
         }
@@ -1164,9 +1183,9 @@ public class OpenCV : ImageProcessing, IDisposable
         {
             Console.WriteLine("Error: {0}", e.Message);
 
-            #region cleanup
+#region cleanup
             CollectGarbage();
-            #endregion
+#endregion
 
             return src;
         }
@@ -1233,9 +1252,9 @@ public class OpenCV : ImageProcessing, IDisposable
         {
             Console.WriteLine("Error: {0}", e.Message);
 
-            #region cleanup
+#region cleanup
             CollectGarbage();
-            #endregion
+#endregion
 
             return src;
         }
@@ -1309,9 +1328,9 @@ public class OpenCV : ImageProcessing, IDisposable
         {
             Console.WriteLine("Error: {0}", e.Message);
 
-            #region cleanup
+#region cleanup
             CollectGarbage();
-            #endregion
+#endregion
 
             return src;
         }
@@ -1370,9 +1389,9 @@ public class OpenCV : ImageProcessing, IDisposable
         {
             Console.WriteLine("Error: {0}", e.Message);
 
-            #region cleanup
+#region cleanup
             CollectGarbage();
-            #endregion
+#endregion
 
             return src;
         }
@@ -1419,9 +1438,9 @@ public class OpenCV : ImageProcessing, IDisposable
         {
             Console.WriteLine("Error: {0}", e.Message);
 
-            #region cleanup
+#region cleanup
             CollectGarbage();
-            #endregion
+#endregion
 
             return src;
         }
@@ -1462,9 +1481,9 @@ public class OpenCV : ImageProcessing, IDisposable
         {
             Console.WriteLine("Error: {0}", e.Message);
 
-            #region cleanup
+#region cleanup
             CollectGarbage();
-            #endregion
+#endregion
 
             return src;
         }
@@ -1513,65 +1532,65 @@ public class OpenCV : ImageProcessing, IDisposable
 
         try
         {
-            #region convert to gray scale
+#region convert to gray scale
             var img = src.ToImage<Bgr, Byte>();
             var uimage = DownUpSample ? NoiseFilter(img) : ConvertToGray(img);
-            #endregion
+#endregion
 
-            #region invert gray colors
+#region invert gray colors
             if (Invert)
                 GrayInvert(uimage);
-            #endregion
+#endregion
 
-            #region normalize
+#region normalize
             if (Normalize)
                 NormalizeGray(uimage);
-            #endregion
+#endregion
 
-            #region apply Gaussian blur
+#region apply Gaussian blur
             var smoothedFrame = Blur ? GaussianBlur(uimage, sx, sy, sigmaX, sigmaY) : uimage.Clone();
-            #endregion
+#endregion
 
-            #region edge detection
+#region edge detection
             Mat cannyEdges = new Mat();
 
             if (SubtractBackground)
             {
-                #region detect background
+#region detect background
                 var foregroundMask = BackgroundSubtract(smoothedFrame);
-                #endregion
+#endregion
 
                 CvInvoke.Canny(foregroundMask, cannyEdges, cannyThreshold, cannyThresholdLinking);
 
-                #region cleanup
+#region cleanup
                 Throw(foregroundMask);
-                #endregion
+#endregion
             }
             else
             {
                 CvInvoke.Canny(smoothedFrame, cannyEdges, cannyThreshold, cannyThresholdLinking);
             }
-            #endregion
+#endregion
 
-            #region find contours
+#region find contours
             var contours = new VectorOfVectorOfPoint();
             CvInvoke.FindContours(cannyEdges, contours, null, RetrType.List, ChainApproxMethod.ChainApproxSimple);
-            #endregion
+#endregion
 
-            #region plot contours
+#region plot contours
             if (contours != null && contours.Size > 0)
             {
                 for (int i = 0; i < contours.Size; i++)
                 {
-                    #region polygon approximation
+#region polygon approximation
                     var contour = contours[i];
                     var approxContour = new VectorOfPoint();
                     var length = CvInvoke.ArcLength(contour, true) * 0.015;
 
                     CvInvoke.ApproxPolyDP(contour, approxContour, length, true);
-                    #endregion
+#endregion
 
-                    #region filter by area
+#region filter by area
                     var area = CvInvoke.ContourArea(approxContour, false);
 
                     if (area >= minArea && area < maxArea) //only consider contours with areas greather than this
@@ -1585,24 +1604,24 @@ public class OpenCV : ImageProcessing, IDisposable
 
                         selection.Add(X0, Y0, X1, Y1);
                     }
-                    #endregion
+#endregion
                 }
             }
-            #endregion
+#endregion
 
-            #region cleanup
+#region cleanup
             Throw(cannyEdges, contours, smoothedFrame, img, uimage);
 
             CollectGarbage();
-            #endregion
+#endregion
         }
         catch (Exception e)
         {
             Console.WriteLine("Error: {0}", e.Message);
 
-            #region cleanup
+#region cleanup
             CollectGarbage();
-            #endregion
+#endregion
         }
     }
 
@@ -1615,39 +1634,39 @@ public class OpenCV : ImageProcessing, IDisposable
 
         try
         {
-            #region convert to grayscale
+#region convert to grayscale
             var img = src.ToImage<Bgr, byte>();
             var uimage = DownUpSample ? NoiseFilter(img) : ConvertToGray(img);
-            #endregion
+#endregion
 
-            #region invert gray colors
+#region invert gray colors
             if (Invert)
                 GrayInvert(uimage);
-            #endregion
+#endregion
 
-            #region normalize
+#region normalize
             if (Normalize)
                 NormalizeGray(uimage);
-            #endregion
+#endregion
 
-            #region apply Gaussian blur
+#region apply Gaussian blur
             var smoothedFrame = Blur ? GaussianBlur(uimage, sx, sy, sigmaX, sigmaY) : uimage.Clone();
-            #endregion
+#endregion
 
-            #region detect blobs
+#region detect blobs
             var blobs = new CvBlobs();
 
             if (SubtractBackground)
             {
-                #region detect background
+#region detect background
                 var foregroundMask = BackgroundSubtract(smoothedFrame);
-                #endregion
+#endregion
 
                 _blobDetector.Detect(foregroundMask.ToImage<Gray, byte>(), blobs);
 
-                #region cleanup
+#region cleanup
                 Throw(foregroundMask);
-                #endregion
+#endregion
             }
             else
             {
@@ -1655,7 +1674,7 @@ public class OpenCV : ImageProcessing, IDisposable
             }
 
             blobs.FilterByArea(minArea, maxArea);
-            #endregion
+#endregion
 
             foreach (var pair in blobs)
             {
@@ -1669,19 +1688,19 @@ public class OpenCV : ImageProcessing, IDisposable
                 selection.Add(X0, Y0, X1, Y1);
             }
 
-            #region cleanup
+#region cleanup
             Throw(img, uimage, blobs, smoothedFrame);
 
             CollectGarbage();
-            #endregion
+#endregion
         }
         catch (Exception e)
         {
             Console.WriteLine("Error: {0}", e.Message);
 
-            #region cleanup
+#region cleanup
             CollectGarbage();
-            #endregion
+#endregion
         }
     }
 
@@ -1696,50 +1715,50 @@ public class OpenCV : ImageProcessing, IDisposable
 
         try
         {
-            #region convert to grayscale
+#region convert to grayscale
             var img = src.ToImage<Bgr, Byte>();
             var uimage = DownUpSample ? NoiseFilter(img) : ConvertToGray(img);
-            #endregion
+#endregion
 
-            #region invert gray colors
+#region invert gray colors
             if (Invert)
                 GrayInvert(uimage);
-            #endregion
+#endregion
 
-            #region normalize
+#region normalize
             if (Normalize)
                 NormalizeGray(uimage);
-            #endregion
+#endregion
 
-            #region apply Gaussian blur
+#region apply Gaussian blur
             var smoothedFrame = Blur ? GaussianBlur(uimage, sx, sy, sigmaX, sigmaY) : uimage.Clone();
-            #endregion
+#endregion
 
-            #region edge detection
+#region edge detection
             if (SubtractBackground)
             {
 
-                #region detect background
+#region detect background
                 var foregroundMask = BackgroundSubtract(smoothedFrame);
-                #endregion
+#endregion
 
-                #region detect keypoints
+#region detect keypoints
                 keypoints = _simpleBlobDetector.Detect(foregroundMask);
-                #endregion
+#endregion
 
-                #region cleanup
+#region cleanup
                 Throw(foregroundMask);
-                #endregion
+#endregion
             }
             else
             {
-                #region detect keypoints
+#region detect keypoints
                 keypoints = _simpleBlobDetector.Detect(smoothedFrame);
-                #endregion
+#endregion
             }
-            #endregion
+#endregion
 
-            #region draw keypoints
+#region draw keypoints
 
             foreach (var keypoint in keypoints)
             {
@@ -1752,21 +1771,21 @@ public class OpenCV : ImageProcessing, IDisposable
                 selection.Add(X0, Y0, X1, Y1);
             }
 
-            #endregion
+#endregion
 
-            #region cleanup
+#region cleanup
             Throw(smoothedFrame, img, uimage);
 
             CollectGarbage();
-            #endregion
+#endregion
         }
         catch (Exception e)
         {
             Console.WriteLine("Error: {0}", e.Message);
 
-            #region cleanup
+#region cleanup
             CollectGarbage();
-            #endregion
+#endregion
         }
     }
 
@@ -1779,47 +1798,47 @@ public class OpenCV : ImageProcessing, IDisposable
 
         try
         {
-            #region convert the image to grayscale
+#region convert the image to grayscale
             var img = src.ToImage<Bgr, Byte>();
             var uimage = DownUpSample ? NoiseFilter(img) : ConvertToGray(img);
-            #endregion
+#endregion
 
-            #region invert gray colors
+#region invert gray colors
             if (Invert)
                 GrayInvert(uimage);
-            #endregion
+#endregion
 
-            #region normalize
+#region normalize
             if (Normalize)
                 NormalizeGray(uimage);
-            #endregion
+#endregion
 
-            #region apply Gaussian blur
+#region apply Gaussian blur
             var smoothedFrame = Blur ? GaussianBlur(uimage, sx, sy, sigmaX, sigmaY) : uimage.Clone();
-            #endregion
+#endregion
 
             CircleF[] circles;
 
-            #region edge detection and Hough circle transform
+#region edge detection and Hough circle transform
             if (SubtractBackground)
             {
-                #region detect background
+#region detect background
                 var foregroundMask = BackgroundSubtract(smoothedFrame);
-                #endregion
+#endregion
 
                 circles = CvInvoke.HoughCircles(foregroundMask, HoughType.Gradient, dp, minDist, cannyThreshold, circleAccumulatorThreshold, minRadius, maxRadius);
 
-                #region cleanup
+#region cleanup
                 Throw(foregroundMask);
-                #endregion
+#endregion
             }
             else
             {
                 circles = CvInvoke.HoughCircles(smoothedFrame, HoughType.Gradient, dp, minDist, cannyThreshold, circleAccumulatorThreshold, minRadius, maxRadius);
             }
-            #endregion
+#endregion
 
-            #region draw circles
+#region draw circles
 
             if (circles.Length > 0)
             {
@@ -1833,21 +1852,21 @@ public class OpenCV : ImageProcessing, IDisposable
                     selection.Add(X0, Y0, X1, Y1);
                 }
             }
-            #endregion
+#endregion
 
-            #region cleanup
+#region cleanup
             Throw(img, uimage, smoothedFrame);
 
             CollectGarbage();
-            #endregion
+#endregion
         }
         catch (Exception e)
         {
             Console.WriteLine("Error: {0}", e.Message);
 
-            #region cleanup
+#region cleanup
             CollectGarbage();
-            #endregion
+#endregion
         }
     }
 }
