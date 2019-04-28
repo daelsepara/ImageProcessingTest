@@ -638,38 +638,41 @@ public partial class MainWindow : Gtk.Window
         {
             using (var mat = cv.ToMat(OriginalImage))
             {
-                var _cascadeClassifier = new CascadeClassifier(Classifier);
+				if (File.Exists(Classifier))
+				{
+					var _cascadeClassifier = new CascadeClassifier(Classifier);
 
-                var img = mat.ToImage<Bgr, byte>();
-                var grayFrame = cv.ConvertToGray(img);
-                var sf = Convert.ToDouble(scaleFactor.Value);
-                var neighbors = Convert.ToInt32(minNeighbors.Value);
-                var minSize = Convert.ToInt32(minArea.Value);
+					var img = mat.ToImage<Bgr, byte>();
+					var grayFrame = cv.ConvertToGray(img);
+					var sf = Convert.ToDouble(scaleFactor.Value);
+					var neighbors = Convert.ToInt32(minNeighbors.Value);
+					var minSize = Convert.ToInt32(minArea.Value);
 
-                if (sf > 1.0)
-                {
-                    var faces = _cascadeClassifier.DetectMultiScale(grayFrame, sf, neighbors, new System.Drawing.Size(minSize, minSize));
+					if (sf > 1.0)
+					{
+						var faces = _cascadeClassifier.DetectMultiScale(grayFrame, sf, neighbors, new System.Drawing.Size(minSize, minSize));
 
-                    GtkSelection.Selection.Clear();
+						GtkSelection.Selection.Clear();
 
-                    if (faces.Length > 0)
-                    {
-                        var ScaleX = Convert.ToDouble(imageBox.WidthRequest) / OriginalImage.Width;
-                        var ScaleY = Convert.ToDouble(imageBox.HeightRequest) / OriginalImage.Height;
+						if (faces.Length > 0)
+						{
+							var ScaleX = Convert.ToDouble(imageBox.WidthRequest) / OriginalImage.Width;
+							var ScaleY = Convert.ToDouble(imageBox.HeightRequest) / OriginalImage.Height;
 
-                        foreach (var face in faces)
-                        {
-                            var x0 = Convert.ToInt32(ScaleX * face.X);
-                            var y0 = Convert.ToInt32(ScaleY * face.Y);
-                            var x1 = Convert.ToInt32(ScaleX * (face.X + face.Width - 1));
-                            var y1 = Convert.ToInt32(ScaleY * (face.Y + face.Height - 1));
+							foreach (var face in faces)
+							{
+								var x0 = Convert.ToInt32(ScaleX * face.X);
+								var y0 = Convert.ToInt32(ScaleY * face.Y);
+								var x1 = Convert.ToInt32(ScaleX * (face.X + face.Width - 1));
+								var y1 = Convert.ToInt32(ScaleY * (face.Y + face.Height - 1));
 
-                            GtkSelection.Selection.Add(x0, y0, x1, y1);
-                        }
-                    }
-                }
+								GtkSelection.Selection.Add(x0, y0, x1, y1);
+							}
+						}
+					}
 
-                cv.Throw(grayFrame, img);
+					cv.Throw(grayFrame, img);
+				}
             }
         });
     }
