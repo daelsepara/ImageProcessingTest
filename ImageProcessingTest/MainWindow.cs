@@ -630,7 +630,7 @@ public partial class MainWindow : Gtk.Window
     }
 
 
-    protected void OnDetectFacesButtonClicked(object sender, EventArgs e)
+    protected void OnDetectObjectsButtonClicked(object sender, EventArgs e)
     {
         HideEdit();
 
@@ -638,41 +638,41 @@ public partial class MainWindow : Gtk.Window
         {
             using (var mat = cv.ToMat(OriginalImage))
             {
-				if (File.Exists(Classifier))
-				{
-					var _cascadeClassifier = new CascadeClassifier(Classifier);
+                if (File.Exists(Classifier))
+                {
+                    var _cascadeClassifier = new CascadeClassifier(Classifier);
 
-					var img = mat.ToImage<Bgr, byte>();
-					var grayFrame = cv.ConvertToGray(img);
-					var sf = Convert.ToDouble(scaleFactor.Value);
-					var neighbors = Convert.ToInt32(minNeighbors.Value);
-					var minSize = Convert.ToInt32(minArea.Value);
+                    var img = mat.ToImage<Bgr, byte>();
+                    var grayFrame = cv.ConvertToGray(img);
+                    var sf = Convert.ToDouble(scaleFactor.Value);
+                    var neighbors = Convert.ToInt32(minNeighbors.Value);
+                    var minSize = Convert.ToInt32(minArea.Value);
 
-					if (sf > 1.0)
-					{
-						var faces = _cascadeClassifier.DetectMultiScale(grayFrame, sf, neighbors, new System.Drawing.Size(minSize, minSize));
+                    if (sf > 1.0)
+                    {
+                        var objects = _cascadeClassifier.DetectMultiScale(grayFrame, sf, neighbors, new System.Drawing.Size(minSize, minSize));
 
-						GtkSelection.Selection.Clear();
+                        GtkSelection.Selection.Clear();
 
-						if (faces.Length > 0)
-						{
-							var ScaleX = Convert.ToDouble(imageBox.WidthRequest) / OriginalImage.Width;
-							var ScaleY = Convert.ToDouble(imageBox.HeightRequest) / OriginalImage.Height;
+                        if (objects.Length > 0)
+                        {
+                            var ScaleX = Convert.ToDouble(imageBox.WidthRequest) / OriginalImage.Width;
+                            var ScaleY = Convert.ToDouble(imageBox.HeightRequest) / OriginalImage.Height;
 
-							foreach (var face in faces)
-							{
-								var x0 = Convert.ToInt32(ScaleX * face.X);
-								var y0 = Convert.ToInt32(ScaleY * face.Y);
-								var x1 = Convert.ToInt32(ScaleX * (face.X + face.Width - 1));
-								var y1 = Convert.ToInt32(ScaleY * (face.Y + face.Height - 1));
+                            foreach (var face in objects)
+                            {
+                                var x0 = Convert.ToInt32(ScaleX * face.X);
+                                var y0 = Convert.ToInt32(ScaleY * face.Y);
+                                var x1 = Convert.ToInt32(ScaleX * (face.X + face.Width - 1));
+                                var y1 = Convert.ToInt32(ScaleY * (face.Y + face.Height - 1));
 
-								GtkSelection.Selection.Add(x0, y0, x1, y1);
-							}
-						}
-					}
+                                GtkSelection.Selection.Add(x0, y0, x1, y1);
+                            }
+                        }
+                    }
 
-					cv.Throw(grayFrame, img);
-				}
+                    cv.Throw(grayFrame, img);
+                }
             }
         });
     }
@@ -904,10 +904,19 @@ public partial class MainWindow : Gtk.Window
             {
                 var FileName = dialog.Filename;
 
-                if (pixbuf != null)
+                var temp = new Pixbuf(FileName);
+
+                if (pixbuf != null && temp != null)
+                {
                     pixbuf.Dispose();
 
-                pixbuf = new Pixbuf(FileName);
+                    pixbuf = new Pixbuf(Colorspace.Rgb, false, 8, temp.Width, temp.Height);
+
+                    temp.Composite(pixbuf, 0, 0, temp.Width, temp.Height, 0, 0, 1, 1, InterpType.Nearest, 255);
+                }
+
+                if (temp != null)
+                    temp.Dispose();
 
                 if (pixbuf != null)
                     RenderImage(pixbuf);

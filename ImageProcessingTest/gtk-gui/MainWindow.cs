@@ -127,7 +127,7 @@ public partial class MainWindow
 
 	private global::Gtk.Button ClearSelected;
 
-	private global::Gtk.Button detectFacesButton;
+	private global::Gtk.Button detectObjectsButton;
 
 	private global::Gtk.SpinButton scaleFactor;
 
@@ -147,7 +147,7 @@ public partial class MainWindow
 		this.HeightRequest = 720;
 		this.Name = "MainWindow";
 		this.Title = global::Mono.Unix.Catalog.GetString("Blob Detection Test Suite");
-		this.WindowPosition = ((global::Gtk.WindowPosition)(4));
+		this.WindowPosition = ((global::Gtk.WindowPosition)(3));
 		this.Resizable = false;
 		this.AllowGrow = false;
 		// Container child MainWindow.Gtk.Container+ContainerChild
@@ -769,14 +769,14 @@ public partial class MainWindow
 		w61.X = 445;
 		w61.Y = 625;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
-		this.detectFacesButton = new global::Gtk.Button();
-		this.detectFacesButton.WidthRequest = 120;
-		this.detectFacesButton.Name = "detectFacesButton";
-		this.detectFacesButton.UseUnderline = true;
-		this.detectFacesButton.FocusOnClick = false;
-		this.detectFacesButton.Label = global::Mono.Unix.Catalog.GetString("Faces");
-		this.MainLayout.Add(this.detectFacesButton);
-		global::Gtk.Fixed.FixedChild w62 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.detectFacesButton]));
+		this.detectObjectsButton = new global::Gtk.Button();
+		this.detectObjectsButton.WidthRequest = 120;
+		this.detectObjectsButton.Name = "detectObjectsButton";
+		this.detectObjectsButton.UseUnderline = true;
+		this.detectObjectsButton.FocusOnClick = false;
+		this.detectObjectsButton.Label = global::Mono.Unix.Catalog.GetString("Haar Cascades");
+		this.MainLayout.Add(this.detectObjectsButton);
+		global::Gtk.Fixed.FixedChild w62 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.detectObjectsButton]));
 		w62.X = 840;
 		w62.Y = 545;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
@@ -822,7 +822,7 @@ public partial class MainWindow
 		w66.Y = 335;
 		// Container child MainLayout.Gtk.Fixed+FixedChild
 		this.selectClassifierButton = new global::Gtk.Button();
-		this.selectClassifierButton.CanFocus = true;
+		this.selectClassifierButton.WidthRequest = 120;
 		this.selectClassifierButton.Name = "selectClassifierButton";
 		this.selectClassifierButton.UseUnderline = true;
 		this.selectClassifierButton.FocusOnClick = false;
@@ -872,7 +872,7 @@ public partial class MainWindow
 		this.dyScale.ValueChanged += new global::System.EventHandler(this.ScaleMoveEvent);
 		this.closeEditButton.Clicked += new global::System.EventHandler(this.CloseEdit);
 		this.ClearSelected.Clicked += new global::System.EventHandler(this.ClearRegions);
-		this.detectFacesButton.Clicked += new global::System.EventHandler(this.OnDetectFacesButtonClicked);
+		this.detectObjectsButton.Clicked += new global::System.EventHandler(this.OnDetectObjectsButtonClicked);
 		this.selectClassifierButton.Clicked += new global::System.EventHandler(this.OnSelectClassifierButtonClicked);
 	}
 }

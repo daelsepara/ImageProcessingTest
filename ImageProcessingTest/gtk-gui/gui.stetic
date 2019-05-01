@@ -11,7 +11,7 @@
     <property name="WidthRequest">1280</property>
     <property name="HeightRequest">720</property>
     <property name="Title" translatable="yes">Blob Detection Test Suite</property>
-    <property name="WindowPosition">CenterOnParent</property>
+    <property name="WindowPosition">CenterAlways</property>
     <property name="Resizable">False</property>
     <property name="AllowGrow">False</property>
     <signal name="DeleteEvent" handler="OnDeleteEvent" />
@@ -844,14 +844,14 @@
           </packing>
         </child>
         <child>
-          <widget class="Gtk.Button" id="detectFacesButton">
+          <widget class="Gtk.Button" id="detectObjectsButton">
             <property name="MemberName" />
             <property name="WidthRequest">120</property>
             <property name="Type">TextOnly</property>
-            <property name="Label" translatable="yes">Faces</property>
+            <property name="Label" translatable="yes">Haar Cascades</property>
             <property name="UseUnderline">True</property>
             <property name="FocusOnClick">False</property>
-            <signal name="Clicked" handler="OnDetectFacesButtonClicked" />
+            <signal name="Clicked" handler="OnDetectObjectsButtonClicked" />
           </widget>
           <packing>
             <property name="X">840</property>
