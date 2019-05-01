@@ -537,96 +537,107 @@ public partial class MainWindow : Gtk.Window
     {
         HideEdit();
 
-        Application.Invoke(delegate
+        if (OriginalImage != null)
         {
-            using (var mat = cv.ToMat(OriginalImage))
+            Application.Invoke(delegate
             {
-                cv.DetectCirclesMat(
-                    mat,
-                    dp.Value,
-                    minDist.Value,
-                    cannyThreshold.Value,
-                    circleAccumulatorThreshold.Value,
-                    Convert.ToInt32(minRadius.Value),
-                    Convert.ToInt32(maxRadius.Value),
-                    GtkSelection.Selection,
-                    Convert.ToDouble(imageBox.WidthRequest) / OriginalImage.Width,
-                    Convert.ToDouble(imageBox.HeightRequest) / OriginalImage.Height
-                );
-            }
-        });
+                using (var mat = cv.ToMat(OriginalImage))
+                {
+                    cv.DetectCirclesMat(
+                        mat,
+                        dp.Value,
+                        minDist.Value,
+                        cannyThreshold.Value,
+                        circleAccumulatorThreshold.Value,
+                        Convert.ToInt32(minRadius.Value),
+                        Convert.ToInt32(maxRadius.Value),
+                        GtkSelection.Selection,
+                        Convert.ToDouble(imageBox.WidthRequest) / OriginalImage.Width,
+                        Convert.ToDouble(imageBox.HeightRequest) / OriginalImage.Height
+                    );
+                }
+            });
+        }
     }
 
     protected void OnDetectBlobsButtonClicked(object o, EventArgs e)
     {
         HideEdit();
 
-        Application.Invoke(delegate
+        if (OriginalImage != null)
         {
-            using (var mat = cv.ToMat(OriginalImage))
+            Application.Invoke(delegate
             {
-                GtkSelection.Selected = 0;
+                using (var mat = cv.ToMat(OriginalImage))
+                {
+                    GtkSelection.Selected = 0;
 
-                cv.DetectBlobsMat(
-                    mat,
-                    cannyThreshold.Value,
-                    linkingThreshold.Value,
-                    minArea.Value,
-                    maxArea.Value,
-                    GtkSelection.Selection,
-                    Convert.ToDouble(imageBox.WidthRequest) / OriginalImage.Width,
-                    Convert.ToDouble(imageBox.HeightRequest) / OriginalImage.Height
-                );
-            }
-        });
+                    cv.DetectBlobsMat(
+                        mat,
+                        cannyThreshold.Value,
+                        linkingThreshold.Value,
+                        minArea.Value,
+                        maxArea.Value,
+                        GtkSelection.Selection,
+                        Convert.ToDouble(imageBox.WidthRequest) / OriginalImage.Width,
+                        Convert.ToDouble(imageBox.HeightRequest) / OriginalImage.Height
+                    );
+                }
+            });
+        }
     }
 
     protected void OnBlobDetectorButtonClicked(object o, EventArgs e)
     {
         HideEdit();
 
-        Application.Invoke(delegate
+        if (OriginalImage != null)
         {
-            using (var mat = cv.ToMat(OriginalImage))
+            Application.Invoke(delegate
             {
-                cv.BlobDetectorMat(
-                    mat,
-                    Convert.ToInt32(minArea.Value),
-                    Convert.ToInt32(maxArea.Value),
-                    GtkSelection.Selection,
-                    Convert.ToDouble(imageBox.WidthRequest) / OriginalImage.Width,
-                    Convert.ToDouble(imageBox.HeightRequest) / OriginalImage.Height
-                );
-            }
-        });
+                using (var mat = cv.ToMat(OriginalImage))
+                {
+                    cv.BlobDetectorMat(
+                        mat,
+                        Convert.ToInt32(minArea.Value),
+                        Convert.ToInt32(maxArea.Value),
+                        GtkSelection.Selection,
+                        Convert.ToDouble(imageBox.WidthRequest) / OriginalImage.Width,
+                        Convert.ToDouble(imageBox.HeightRequest) / OriginalImage.Height
+                    );
+                }
+            });
+        }
     }
 
     protected void OnSimpleBlobDetectorClicked(object o, EventArgs e)
     {
         HideEdit();
 
-        Application.Invoke(delegate
+        if (OriginalImage != null)
         {
-            var parameters = new Emgu.CV.Features2D.SimpleBlobDetectorParams
+            Application.Invoke(delegate
             {
-                MinArea = Convert.ToInt32(minArea.Value),
-                MaxArea = Convert.ToInt32(maxArea.Value),
-                FilterByArea = true
-            };
+                var parameters = new Emgu.CV.Features2D.SimpleBlobDetectorParams
+                {
+                    MinArea = Convert.ToInt32(minArea.Value),
+                    MaxArea = Convert.ToInt32(maxArea.Value),
+                    FilterByArea = true
+                };
 
-            cv.InitSimpleBlobDetector(parameters);
+                cv.InitSimpleBlobDetector(parameters);
 
-            using (var mat = cv.ToMat(OriginalImage))
-            {
-
-                cv.SimpleBlobDetectionMat(
-                    mat,
-                    GtkSelection.Selection,
-                    Convert.ToDouble(imageBox.WidthRequest) / OriginalImage.Width,
-                    Convert.ToDouble(imageBox.HeightRequest) / OriginalImage.Height
-                );
-            }
-        });
+                using (var mat = cv.ToMat(OriginalImage))
+                {
+                    cv.SimpleBlobDetectionMat(
+                        mat,
+                        GtkSelection.Selection,
+                        Convert.ToDouble(imageBox.WidthRequest) / OriginalImage.Width,
+                        Convert.ToDouble(imageBox.HeightRequest) / OriginalImage.Height
+                    );
+                }
+            });
+        }
     }
 
 
@@ -634,47 +645,25 @@ public partial class MainWindow : Gtk.Window
     {
         HideEdit();
 
-        Application.Invoke(delegate
+        if (OriginalImage != null)
         {
-            using (var mat = cv.ToMat(OriginalImage))
+            Application.Invoke(delegate
             {
-                if (File.Exists(Classifier))
+                using (var mat = cv.ToMat(OriginalImage))
                 {
-                    var _cascadeClassifier = new CascadeClassifier(Classifier);
-
-                    var img = mat.ToImage<Bgr, byte>();
-                    var grayFrame = cv.ConvertToGray(img);
-                    var sf = Convert.ToDouble(scaleFactor.Value);
-                    var neighbors = Convert.ToInt32(minNeighbors.Value);
-                    var minSize = Convert.ToInt32(minArea.Value);
-
-                    if (sf > 1.0)
-                    {
-                        var objects = _cascadeClassifier.DetectMultiScale(grayFrame, sf, neighbors, new System.Drawing.Size(minSize, minSize));
-
-                        GtkSelection.Selection.Clear();
-
-                        if (objects.Length > 0)
-                        {
-                            var ScaleX = Convert.ToDouble(imageBox.WidthRequest) / OriginalImage.Width;
-                            var ScaleY = Convert.ToDouble(imageBox.HeightRequest) / OriginalImage.Height;
-
-                            foreach (var face in objects)
-                            {
-                                var x0 = Convert.ToInt32(ScaleX * face.X);
-                                var y0 = Convert.ToInt32(ScaleY * face.Y);
-                                var x1 = Convert.ToInt32(ScaleX * (face.X + face.Width - 1));
-                                var y1 = Convert.ToInt32(ScaleY * (face.Y + face.Height - 1));
-
-                                GtkSelection.Selection.Add(x0, y0, x1, y1);
-                            }
-                        }
-                    }
-
-                    cv.Throw(grayFrame, img);
+                    cv.DetectHaarMat(
+                        mat,
+                        Classifier,
+                        Convert.ToDouble(scaleFactor.Value),
+                        Convert.ToInt32(minArea.Value),
+                        Convert.ToInt32(minNeighbors.Value),
+                        GtkSelection.Selection,
+                        Convert.ToDouble(imageBox.WidthRequest) / OriginalImage.Width,
+                        Convert.ToDouble(imageBox.HeightRequest) / OriginalImage.Height
+                    );
                 }
-            }
-        });
+            });
+        }
     }
 
     protected void OnSubtractBgToggled(object o, EventArgs e)
