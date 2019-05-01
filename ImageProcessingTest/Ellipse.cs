@@ -27,6 +27,10 @@ public class Ellipse
 
     public bool Enabled;
 
+    public double Score;
+
+    public string Class;
+
     /*
 	 * Ellipse
 	 * 
@@ -64,6 +68,11 @@ public class Ellipse
         Initialize(x, y, width, height, 0, true);
     }
 
+    public Ellipse(int x, int y, int width, int height, double score, string className)
+    {
+        Initialize(x, y, width, height, 0, score, className, true);
+    }
+
     void Initialize(int x, int y, int width, int height, int rotation, bool enabled)
     {
         X = x;
@@ -75,6 +84,25 @@ public class Ellipse
         Height = height;
 
         Rotation = rotation;
+
+        Enabled = enabled;
+    }
+
+    void Initialize(int x, int y, int width, int height, int rotation, double score, string className, bool enabled)
+    {
+        X = x;
+
+        Y = y;
+
+        Width = width;
+
+        Height = height;
+
+        Rotation = rotation;
+
+        Score = score;
+
+        Class = className;
 
         Enabled = enabled;
     }
